@@ -13,7 +13,7 @@ export default defineConfig({
         target: 'https://paydeya-backend.onrender.com',
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, '/api')
+        rewrite: (path) => path.replace(/^\/api/, '/api/v1')
       }
     }
   }
