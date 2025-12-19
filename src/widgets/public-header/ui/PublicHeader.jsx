@@ -8,7 +8,7 @@ export function PublicHeader() {
       </div>
 
       <div className="header-buttons">
-        <Link to="/registration/choose-role" className="btn-register">Регистрация</Link>
+        <Link to="/choice-role" className="btn-register">Регистрация</Link>
         <Link to="/login" className="btn-login">Вход</Link>
       </div>
     </div>

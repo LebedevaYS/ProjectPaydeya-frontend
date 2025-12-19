@@ -13,5 +13,5 @@ export const router = createBrowserRouter([
 
   { path: "/login", element: <LoginPage /> },
   { path: "/registration", element: <RegistrationPage /> },
-  { path: "/registration/choose-role", element: <ChoiceRolePage /> },
+  { path: "/choice-role", element: <ChoiceRolePage /> },
 ]);

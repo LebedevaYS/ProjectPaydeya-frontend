@@ -88,7 +88,21 @@ export function LoginPage() {
           localStorage.setItem("rememberMe", "true");
         }
 
-        navigate("/");
+        // Перенаправляем в зависимости от роли
+      const userRole = data.user.role;
+      switch (userRole) {
+        case 'teacher':
+          navigate('/teacher/dashboard');
+          break;
+        case 'student':
+          navigate('/student/dashboard');
+          break;
+        case 'admin':
+          navigate('/admin/dashboard');
+          break;
+        default:
+          navigate('/');
+      }
       } else {
         // Используем общую функцию перевода
         const translatedError = translateError(data.error || "Ошибка входа");

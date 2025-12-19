@@ -1,37 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import HealthCheck from './components/HealthCheck.jsx'
+// src/App.jsx
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { LoginPage } from './pages/auth/login/ui/LoginPage';
+import { RegistrationPage } from './pages/auth/registration/ui/RegistrationPage';
+import { ChoiceRolePage } from './pages/auth/choice-role/ui/ChoiceRolePage';
+import { CreateMaterialPage } from './pages/material-editor/CreateMaterialPage/CreateMaterialPage';
+import { TeacherMainPage } from './pages/teacher/main/ui/TeacherMainPage';
+import { PublicHeader } from './widgets/public-header';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Router>
+      <div className="app">
+        <Routes>
+          {/* Главная страница */}
+          <Route path="/" element={
+            <>
+              <PublicHeader />
+              <div className="main-content">
+                <h1>Добро пожаловать в Paideya</h1>
+                <p>Образовательная платформа нового поколения</p>
+                <div className="action-buttons">
+                  <a href="/login" className="btn btn-primary">Войти</a>
+                  <a href="/choice-role" className="btn btn-secondary">Регистрация</a>
+                </div>
+              </div>
+            </>
+          } />
+          
+          {/* Авторизация */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/registration" element={<RegistrationPage />} />
+          <Route path="/choice-role" element={<ChoiceRolePage />} />
+          
+          {/* Учитель */}
+          <Route path="/teacher/dashboard" element={<TeacherMainPage />} />
+          
+          {/* Редактор материалов */}
+          <Route path="/materials/new" element={<CreateMaterialPage />} />
+          
+          {/* 404 страница */}
+          <Route path="*" element={
+            <div className="not-found">
+              <h1>404 - Страница не найдена</h1>
+              <a href="/" className="btn btn-primary">На главную</a>
+            </div>
+          } />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <HealthCheck />
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
