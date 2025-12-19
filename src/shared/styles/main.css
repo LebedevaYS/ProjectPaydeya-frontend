@@ -105,3 +105,15 @@ body {
     font-display: swap;
 }
 
+/* Добавьте в ваш CSS файл */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-info > div {
+  line-height: 1.3;
+}
+
+

@@ -22,8 +22,25 @@ function App() {
                 <h1>Добро пожаловать в Paideya</h1>
                 <p>Образовательная платформа нового поколения</p>
                 <div className="action-buttons">
-                  <a href="/login" className="btn btn-primary">Войти</a>
-                  <a href="/choice-role" className="btn btn-secondary">Регистрация</a>
+                  <button
+                      onClick={() => {
+                        localStorage.clear();
+                        window.location.href = '/login';
+                      }}
+                      className="btn btn-primary"
+                    >
+                      Войти
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        localStorage.clear();
+                        window.location.href = '/choice-role';
+                      }}
+                      className="btn btn-secondary"
+                    >
+                      Регистрация
+                    </button>
                 </div>
               </div>
             </>
