@@ -51,14 +51,14 @@ export function CreateMaterialPage() {
 
   // Запасной список предметов если API не работает
   const getDefaultSubjects = () => [
-    { id: 'math', name: 'Математика', icon: '📐' },
-    { id: 'physics', name: 'Физика', icon: '⚡' },
-    { id: 'chemistry', name: 'Химия', icon: '🧪' },
-    { id: 'biology', name: 'Биология', icon: '🌿' },
-    { id: 'history', name: 'История', icon: '📜' },
-    { id: 'literature', name: 'Литература', icon: '📚' },
-    { id: 'english', name: 'Английский язык', icon: '🇬🇧' },
-    { id: 'informatics', name: 'Информатика', icon: '💻' },
+    { id: 'math', name: 'Математика'},
+    { id: 'physics', name: 'Физика'},
+    { id: 'chemistry', name: 'Химия'},
+    { id: 'biology', name: 'Биология'},
+    { id: 'history', name: 'История'},
+    { id: 'literature', name: 'Литература' },
+    { id: 'english', name: 'Английский язык'},
+    { id: 'informatics', name: 'Информатика'},
   ];
 
   const handleSubmit = async (e) => {
@@ -219,7 +219,6 @@ export function CreateMaterialPage() {
                         disabled={isLoading}
                         title={subj.name}
                       >
-                        <span className="subject-icon">{subj.icon || '📚'}</span>
                         <span className="subject-name">{subj.name}</span>
                       </button>
                     ))}

@@ -42,7 +42,7 @@ export function TeacherMainPage() {
         alignItems: 'center', 
         height: '100vh' 
       }}>
-        <div className="spinner"></div>
+        <div>Загрузка...</div>
       </div>
     );
   }
@@ -50,137 +50,84 @@ export function TeacherMainPage() {
   return (
     <>
       <PublicHeader />
-      
+
       <div className="teacher-dashboard">
-        <div className="dashboard-container">
-          <div className="dashboard-header">
-            <h1 className="welcome-title">
+        <div className="dashboard-container" style={{
+          maxWidth: '800px',
+          margin: '0 auto',
+          padding: '40px 20px',
+          textAlign: 'center'
+        }}>
+          {/* Заголовок */}
+          <div className="dashboard-header" style={{ marginBottom: '50px' }}>
+            <h1 style={{
+              fontSize: '2.5rem',
+              marginBottom: '10px',
+              color: '#333'
+            }}>
               Добро пожаловать, {user?.fullName || 'Учитель'}! 👨‍🏫
             </h1>
-            <p className="welcome-subtitle">
+            <p style={{
+              fontSize: '1.2rem',
+              color: '#666',
+              marginBottom: '40px'
+            }}>
               Панель управления преподавателя
             </p>
           </div>
 
-          <div className="dashboard-stats">
-            <div className="stat-card">
-              <div className="stat-icon">📚</div>
-              <div className="stat-value">0</div>
-              <div className="stat-label">Мои материалы</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-icon">👥</div>
-              <div className="stat-value">0</div>
-              <div className="stat-label">Ученики</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-icon">⭐</div>
-              <div className="stat-value">0</div>
-              <div className="stat-label">Рейтинг</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-icon">📈</div>
-              <div className="stat-value">0</div>
-              <div className="stat-label">Просмотры</div>
-            </div>
+          {/* Основная кнопка создания материала */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '200px'
+          }}>
+            <button
+              onClick={() => navigate('/materials/new')}
+              style={{
+                padding: '20px 40px',
+                fontSize: '1.3rem',
+                backgroundColor: '#4CAF50',
+                color: 'white',
+                border: 'none',
+                borderRadius: '10px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '15px',
+                boxShadow: '0 4px 15px rgba(76, 175, 80, 0.3)',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseOver={(e) => {
+                e.target.style.backgroundColor = '#45a049';
+                e.target.style.transform = 'translateY(-2px)';
+              }}
+              onMouseOut={(e) => {
+                e.target.style.backgroundColor = '#4CAF50';
+                e.target.style.transform = 'translateY(0)';
+              }}
+            >
+              <span style={{ fontSize: '1.8rem' }}>📝</span>
+              <span>Создать материал</span>
+            </button>
           </div>
 
-          <div className="dashboard-actions">
-            <div className="action-grid">
-              {/* Создать материал */}
-              <button 
-                className="action-card action-card-primary"
-                onClick={() => navigate('/materials/new')}
-              >
-                <div className="action-icon">📝</div>
-                <div className="action-title">Создать материал</div>
-                <div className="action-description">
-                  Создайте новый учебный материал с интерактивными элементами
-                </div>
-              </button>
-
-              {/* Мои материалы */}
-              <button 
-                className="action-card"
-                onClick={() => navigate('/materials')}
-              >
-                <div className="action-icon">📁</div>
-                <div className="action-title">Мои материалы</div>
-                <div className="action-description">
-                  Просмотр и редактирование созданных материалов
-                </div>
-              </button>
-
-              {/* Статистика */}
-              <button 
-                className="action-card"
-                onClick={() => navigate('/teacher/statistics')}
-              >
-                <div className="action-icon">📊</div>
-                <div className="action-title">Статистика</div>
-                <div className="action-description">
-                  Аналитика по вашим материалам и ученикам
-                </div>
-              </button>
-
-              {/* Профиль */}
-              <button 
-                className="action-card"
-                onClick={() => navigate('/teacher/profile')}
-              >
-                <div className="action-icon">👤</div>
-                <div className="action-title">Профиль</div>
-                <div className="action-description">
-                  Настройки профиля и аккаунта
-                </div>
-              </button>
-            </div>
-          </div>
-
-          {/* Быстрый старт */}
-          <div className="quick-start">
-            <h2 className="section-title">Быстрый старт</h2>
-            <div className="quick-steps">
-              <div className="step">
-                <div className="step-number">1</div>
-                <div className="step-content">
-                  <h3>Создайте первый материал</h3>
-                  <p>Используйте визуальный редактор для создания интерактивного урока</p>
-                  <button 
-                    className="step-action"
-                    onClick={() => navigate('/materials/new')}
-                  >
-                    Начать создание →
-                  </button>
-                </div>
-              </div>
-              <div className="step">
-                <div className="step-number">2</div>
-                <div className="step-content">
-                  <h3>Заполните профиль</h3>
-                  <p>Добавьте информацию о себе, специализации и опыт</p>
-                  <button 
-                    className="step-action"
-                    onClick={() => navigate('/teacher/profile')}
-                  >
-                    Заполнить профиль →
-                  </button>
-                </div>
-              </div>
-              <div className="step">
-                <div className="step-number">3</div>
-                <div className="step-content">
-                  <h3>Поделитесь материалом</h3>
-                  <p>Опубликуйте материал и поделитесь ссылкой с учениками</p>
-                  <button 
-                    className="step-action"
-                    onClick={() => navigate('/materials')}
-                  >
-                    Опубликовать →
-                  </button>
-                </div>
-              </div>
-            </div>
+          {/* Инструкция для отладки */}
+          <div style={{
+            marginTop: '50px',
+            padding: '20px',
+            backgroundColor: '#f8f9fa',
+            borderRadius: '10px',
+            borderLeft: '4px solid #007bff'
+          }}>
+            <h3 style={{ color: '#007bff', marginBottom: '10px' }}>
+              Режим отладки
+            </h3>
+            <p style={{ color: '#666', lineHeight: '1.5' }}>
+              На этой странице оставлены только основные элементы для тестирования.
+              Полная версия будет восстановлена после отладки.
+            </p>
           </div>
         </div>
       </div>

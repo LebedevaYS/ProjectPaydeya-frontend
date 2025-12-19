@@ -5,6 +5,7 @@ import { RegistrationPage } from './pages/auth/registration/ui/RegistrationPage'
 import { ChoiceRolePage } from './pages/auth/choice-role/ui/ChoiceRolePage';
 import { CreateMaterialPage } from './pages/material-editor/CreateMaterialPage/CreateMaterialPage';
 import { TeacherMainPage } from './pages/teacher/main/ui/TeacherMainPage';
+import { StudentMainPage } from './pages/student/main/ui/StudentMainPage';
 import { PublicHeader } from './widgets/public-header';
 import './App.css';
 
@@ -35,6 +36,9 @@ function App() {
           
           {/* Учитель */}
           <Route path="/teacher/dashboard" element={<TeacherMainPage />} />
+
+          {/* Студент */}
+          <Route path="/student/dashboard" element={<StudentMainPage />} />
           
           {/* Редактор материалов */}
           <Route path="/materials/new" element={<CreateMaterialPage />} />

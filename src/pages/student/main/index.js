@@ -1,0 +1,1 @@
+export { StudentMainPage } from "./ui/StudentMainPage";
