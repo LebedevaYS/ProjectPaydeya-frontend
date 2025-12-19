@@ -21,6 +21,7 @@ body {
     align-items: center;
     max-width: 1312px;
     margin: 0 auto;
+    margin-bottom: 40px;
     width: 100%;
 }
 
@@ -103,4 +104,3 @@ body {
     font-style: normal;
     font-display: swap;
 }
-

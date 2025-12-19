@@ -1,26 +1,544 @@
-body {
-    font-family: var(--font-sans-dashboard);
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+.teacher-page{
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers.
+ */
+
+.teacher-page{
+  margin: 0;
+}
+
+/**
+ * Render the `main` element consistently in IE.
+ */
+
+.teacher-page main{
+  display: block;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+.teacher-page h1{
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+
+.teacher-page hr{
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+.teacher-page pre{
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+
+.teacher-page a{
+  background-color: transparent;
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+
+.teacher-page abbr[title]{
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+.teacher-page b, .teacher-page strong{
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+.teacher-page code, .teacher-page kbd, .teacher-page samp{
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+.teacher-page small{
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+.teacher-page sub, .teacher-page sup{
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.teacher-page sub{
+  bottom: -0.25em;
+}
+
+.teacher-page sup{
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+
+.teacher-page img{
+  border-style: none;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+.teacher-page button, .teacher-page input, .teacher-page optgroup, .teacher-page select, .teacher-page textarea{
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+.teacher-page button, .teacher-page input{ /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+.teacher-page button, .teacher-page select{ /* 1 */
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+
+.teacher-page button, .teacher-page [type="button"], .teacher-page [type="reset"], .teacher-page [type="submit"]{
+  -webkit-appearance: button;
+  appearance: none;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+.teacher-page button::-moz-focus-inner, .teacher-page [type="button"]::-moz-focus-inner, .teacher-page [type="reset"]::-moz-focus-inner, .teacher-page [type="submit"]::-moz-focus-inner{
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+.teacher-page button:-moz-focusring, .teacher-page [type="button"]:-moz-focusring, .teacher-page [type="reset"]:-moz-focusring, .teacher-page [type="submit"]:-moz-focusring{
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+.teacher-page fieldset{
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+.teacher-page legend{
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+.teacher-page progress{
+  vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+
+.teacher-page textarea{
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+
+.teacher-page [type="checkbox"], .teacher-page [type="radio"]{
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+.teacher-page [type="number"]::-webkit-inner-spin-button, .teacher-page [type="number"]::-webkit-outer-spin-button{
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+.teacher-page [type="search"]{
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+  appearance: none;
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+
+.teacher-page [type="search"]::-webkit-search-decoration{
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+.teacher-page ::-webkit-file-upload-button{
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+
+.teacher-page details{
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+.teacher-page summary{
+  display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10+.
+ */
+
+.teacher-page template{
+  display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+
+.teacher-page [hidden]{
+  display: none;
+}
+
+/* ==========================================================================
+   CUSTOM RESET (ДОПОЛНЕНИЕ К NORMALIZE)
+   ========================================================================== */
+
+/* Единый подход к box-sizing */
+.teacher-page, .teacher-page *::before, .teacher-page *::after{
+  box-sizing: border-box;
+}
+
+/* Базовые настройки изображений */
+.teacher-page img{
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Базовые настройки body */
+.teacher-page{
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Убираем лишние обнуления*/
+.teacher-page, .teacher-page{
+  margin: 0;
+  padding: 0;
+}
+
+/* ОБНУЛЕНИЕ ДЛЯ КОМПОНЕНТОВ*/
+.teacher-page .footer{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    display: block;
+    width: 100%;
+}
+
+.teacher-page .footer__container{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.teacher-page .footer__left, .teacher-page .footer__right{
+    margin: 0;
+    padding: 0;
+}
+
+.teacher-page .footer__main-nav{
+    margin: 0;
+    padding: 0;
+}
+
+.teacher-page .footer__column{
+    margin: 0;
+    padding: 0;
+}
+
+.teacher-page .footer__list{
+    margin: 0;
+    padding: 0;
+    list-style: none; /* Убирает маркеры */
+}
+
+.teacher-page .footer__list li{
+    margin: 0;
+    padding: 0;
+}
+
+.teacher-page .footer__cookies{
+    margin: 0;
+    padding: 0;
+}
+
+.teacher-page .footer__cookies-text{
+    margin: 0;
+    padding: 0;
+}
+
+/* ОБНУЛЕНИЕ ЗАГОЛОВКОВ ДЛЯ СЕКЦИЙ */
+.teacher-page h2{
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-family: inherit;
+    color: inherit;
+    text-align: inherit;
+    text-decoration: inherit;
+}
+
+.teacher-page h3{
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+    text-align: inherit;
+    text-decoration: inherit;
+}
+
+/* ==========================================================================
+   CSS VARIABLES & UTILITIES
+   ========================================================================== */
+
+.teacher-page{
+  /* Цвета */
+  --primary-blue: #4172f2;
+  --primary-dark: #2E2E2E;
+  --background-light: #f1f2f4;
+  --background-white: #ffffff;
+  --accent-blue: #BEDFFF;
+  --accent-purple: #BAA4F9;
+  
+  /* Текст */
+  --text-dark: #191919;
+  --text-gray: #5E6472;
+  --text-gray-light: #C9CDD6;
+  --text-light: #FFFFFF;
+  --text-muted: #6C757D;
+  --text-blue-light: #E8EEFF;
+  --text-gray-medium: #495057;
+  
+  /* Градиенты */
+  --gradient-blue: linear-gradient(90deg, #0059E6 1.9%, #3B95FF 109.51%);
+  --gradient-blue-vertical: linear-gradient(180deg, #0059E6 0%, #3B95FF 100%);
+  --gradient-dark-vertical: linear-gradient(180deg, #2E2E2E 0%, #4A4A4A 100%);
+  
+  /* Тени */
+  --shadow-card: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-hover: 0 12px 40px rgba(0,0,0,0.15);
+  --shadow-button: 0 4px 12px rgba(0,0,0,0.15);
+  
+  /* Анимации */
+  --transition: all 0.3s ease;
+  --transition-slow: all 0.5s ease;
+  
+  /* Отступы */
+  --section-gap: 64px;
+  --container-padding: 48px;
+  --card-gap: 24px;
+}
+
+/* Утилитные классы */
+.teacher-page .hover-lift{
+  transition: var(--transition);
+}
+
+.teacher-page .hover-lift:hover{
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+.teacher-page .hover-rotate{
+  transition: var(--transition);
+}
+
+.teacher-page .hover-rotate:hover{
+  transform: rotate(45deg);
+}
+
+.teacher-page .text-center{
+  text-align: center;
+}
+
+.teacher-page .sr-only{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.teacher-page{
+    box-sizing: border-box;
+}
+
+.teacher-page, .teacher-page *::before, .teacher-page *::after{
+    box-sizing: inherit;
+}
+
+.teacher-page{
+    font-family: 'Manrope', sans-serif;
     font-style: normal;
     font-size: 16px;
     font-weight: 400;
     color: black;
-    background: var(--background-light);
-    line-height: var(--lh-13);
+    background: #f1f2f4;
+    line-height: 1.3;
 }
 
 
-.header {
+.teacher-page .header{
     /* position: sticky; */
     top: 0;
     width: 100%;
 }
 
-.container {
+.teacher-page .container{
     display: flex;
     
 }
 
-.sidebar--left {
+.teacher-page .sidebar--left{
     max-width: 220px;
     height: 100vh;
     max-height: 1024px;
@@ -30,23 +548,23 @@ body {
     flex-direction: column;
 }
 
-.sidebar-nav {
+.teacher-page .sidebar-nav{
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
-.sidebar-nav__header {
+.teacher-page .sidebar-nav__header{
     padding: 4px 24px;
 }
 
-.sidebar-nav__menu-container {
+.teacher-page .sidebar-nav__menu-container{
     position: relative;
     margin-top: 32px;
     flex-grow: 1;
 }
 
-.sidebar-nav__menu {
+.teacher-page .sidebar-nav__menu{
     list-style: none;
     padding: 0;
     margin: 0;
@@ -54,36 +572,36 @@ body {
     z-index: 2;
 }
 
-.sidebar-nav__item {
+.teacher-page .sidebar-nav__item{
     display: flex;
     margin-bottom: 0;
     padding: 0;
 }
 
-.sidebar-nav__icon-wrapper {
+.teacher-page .sidebar-nav__icon-wrapper{
     position: relative;
     width: 20px;
     height: 20px;
 }
 
-.sidebar-nav__icon {
+.teacher-page .sidebar-nav__icon{
     max-width: 20px;
     max-height: 20px;
     transition: all 0.2s ease;
 }
 
-.sidebar-nav__icon--default {
+.teacher-page .sidebar-nav__icon--default{
     opacity: 1;
 }
 
-.sidebar-nav__icon--hover {
+.teacher-page .sidebar-nav__icon--hover{
     position: absolute;
     top: 0;
     left: 0;
     opacity: 0;
 }
 
-.sidebar-nav__link {
+.teacher-page .sidebar-nav__link{
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -99,7 +617,7 @@ body {
 }
 
 /* Анимированная полоска */
-.sidebar-nav__slider {
+.teacher-page .sidebar-nav__slider{
     position: absolute;
     left: 0;
     width: 4px;
@@ -110,36 +628,47 @@ body {
     top: 0;
 }
 
-.sidebar-nav__link--active {
+.teacher-page .sidebar-nav__link--active{
     color: var(--primary-blue, #1976d2);
     font-weight: 500;
 }
 
-.sidebar-nav__link--active .sidebar-nav__icon--default {
+.teacher-page .sidebar-nav__link--active .sidebar-nav__icon--default{
     opacity: 0;
 }
 
-.sidebar-nav__link--active .sidebar-nav__icon--hover {
+.teacher-page .sidebar-nav__link--active .sidebar-nav__icon--hover{
     opacity: 1;
 }
 
 /* Ховер эффекты для ссылки */
-.sidebar-nav__link:hover {
+.teacher-page .sidebar-nav__link:hover{
     background-color: rgba(0, 0, 0, 0.05);
     color: var(--primary-blue, #1976d2);
 }
 
-.sidebar-nav__link:hover .sidebar-nav__icon--default {
+.teacher-page .sidebar-nav__link:hover .sidebar-nav__icon--default{
     opacity: 0;
 }
 
-.sidebar-nav__link:hover .sidebar-nav__icon--hover {
+.teacher-page .sidebar-nav__link:hover .sidebar-nav__icon--hover{
     opacity: 1;
 }
 
 /* Анимированная полоска */
-/* (deduped) duplicate .sidebar-nav__slider removed */
-.sidebar-nav__promo {
+.teacher-page .sidebar-nav__slider{
+    position: absolute;
+    left: 0;
+    width: 4px;
+    background-color: var(--primary-blue, #1976d2);
+    border-radius: 0 2px 2px 0;
+    transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    top: 0;
+    /* height теперь задается через JS */
+}
+
+.teacher-page .sidebar-nav__promo{
     margin: 0px 24px 0px 24px;
     padding: 16px;
     border-radius: 16px;
@@ -147,13 +676,13 @@ body {
     position: relative;
     overflow: hidden;
     background: 
-        url(../img/svg/promo_logo.svg) no-repeat,
+        url(/img/svg/promo_logo.svg) no-repeat,
         #4172F1; /* самый светлый оттенок как фон */
     background-size: auto 100%;
     aspect-ratio: 172 / 200;
 }
 
-.sidebar-nav__promo::after {
+.teacher-page .sidebar-nav__promo::after{
     content: '';
     position: absolute;
     top: 0;
@@ -168,31 +697,28 @@ body {
     pointer-events: none;
 }
 
-.sidebar-nav__promo-text,
-.sidebar-nav__promo-subtext,
-.sidebar-nav__promo-button {
+.teacher-page .sidebar-nav__promo-text, .teacher-page .sidebar-nav__promo-subtext, .teacher-page .sidebar-nav__promo-button{
     position: relative;
     z-index: 1;
 }
 
-.sidebar-nav__promo-text {
+.teacher-page .sidebar-nav__promo-text{
   font-size: 16px;
   font-weight: 600;
   margin: 0;
 }
 
-.sidebar-nav__promo-subtext,
-.sidebar-nav__promo-button {
+.teacher-page .sidebar-nav__promo-subtext, .teacher-page .sidebar-nav__promo-button{
     font-size: 14px;
     font-weight: 500;
 }
 
-.sidebar-nav__promo-subtext {
+.teacher-page .sidebar-nav__promo-subtext{
   color: var(--accent-blue);
   margin: 4px 0px 30px 0px;
 }
 
-.sidebar-nav__promo-button {
+.teacher-page .sidebar-nav__promo-button{
     background-color: var(--background-white);
     border: none;
     border-radius: 8px;
@@ -209,11 +735,11 @@ body {
     color: #212529;
 }
 
-.sidebar-nav__promo-button:hover {
+.teacher-page .sidebar-nav__promo-button:hover{
     background-color: #f0f0f0;
 }
 
-.sidebar-nav__link--help {
+.teacher-page .sidebar-nav__link--help{
     display: flex;
     align-items: center;
     padding: 10px 24px;
@@ -224,11 +750,11 @@ body {
     transition: color 0.3s ease;
 }
 
-.sidebar-nav__link--help:hover {
+.teacher-page .sidebar-nav__link--help:hover{
     color: var(--primary-blue, #1976d2);
 }
 
-.sidebar-nav__help-icon {
+.teacher-page .sidebar-nav__help-icon{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -244,12 +770,12 @@ body {
     color: var(--text-primary, #333);
 }
 
-.sidebar-nav__link--help:hover .sidebar-nav__help-icon {
+.teacher-page .sidebar-nav__link--help:hover .sidebar-nav__help-icon{
     border-color: var(--primary-blue, #1976d2);
     color: var(--primary-blue, #1976d2);
 }
 
-.content {
+.teacher-page .content{
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -258,7 +784,7 @@ body {
     width: 100%;
 }
 
-.header {
+.teacher-page .header{
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 32px;
@@ -267,7 +793,7 @@ body {
     width: 100%;
 }
 
-.main {
+.teacher-page .main{
     flex: 1;
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -277,14 +803,14 @@ body {
 }
 
 /* Поисковая строка */
-.search {
+.teacher-page .search{
     position: relative;
     width: 100%;
     display: flex;
     align-items: center;
 }
 
-.search__field {
+.teacher-page .search__field{
     width: 100%;
     padding: 12px 16px 12px 42px;
     border-radius: 16px;
@@ -297,15 +823,15 @@ body {
     line-height: 1.5;
 }
 
-.search__field:focus {
+.teacher-page .search__field:focus{
     outline: none;
 }
 
-.search__field::placeholder {
+.teacher-page .search__field::placeholder{
     color: var(--text-gray);
 }
 
-.search::before {
+.teacher-page .search::before{
     content: '';
     position: absolute;
     left: 16px;
@@ -318,7 +844,7 @@ body {
 }
 
 /* Правая часть шапки */
-.header__right {
+.teacher-page .header__right{
     display: flex;
     align-items: center;
     gap: 20px;
@@ -326,7 +852,7 @@ body {
 }
 
 /* Уведомления */
-.notification {
+.teacher-page .notification{
     position: relative;
     background: var(--background-white);
     border: none;
@@ -341,7 +867,7 @@ body {
     border-radius: 16px;
 }
 
-.notification-badge {
+.teacher-page .notification-badge{
     position: absolute;
     top: 8px;
     right: 12px;
@@ -349,11 +875,11 @@ body {
     height: 12px;
 }
 
-.notification:hover {
+.teacher-page .notification:hover{
     background: var(--background-light);
 }
 
-.color-picker__preview {
+.teacher-page .color-picker__preview{
     position: absolute;
     top: 6px;
     right: 6px;
@@ -362,7 +888,7 @@ body {
 }
 
 /* Профиль */
-.user {
+.teacher-page .user{
     display: flex;
     align-items: center;
     gap: 12px;
@@ -374,11 +900,11 @@ body {
     transition: var(--transition);
 }
 
-.user:hover {
+.teacher-page .user:hover{
     background: var(--background-light);
 }
 
-.user__avatar {
+.teacher-page .user__avatar{
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -392,7 +918,7 @@ body {
     flex-shrink: 0;
 }
 
-.user__name {
+.teacher-page .user__name{
     font-family: 'Manrope', sans-serif;
     font-size: 16px;
     font-weight: 500;
@@ -404,7 +930,7 @@ body {
    PART # - MAIN__LEFT
    ========================================================================== */
 
-.main__left {
+.teacher-page .main__left{
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -415,27 +941,27 @@ body {
    ========================================================================== */
 
 /* Основные стили блока "Последние редактируемые" */
-.editable-section {
+.teacher-page .editable-section{
     background: #FFFFFF;
     border-radius: 12px;
     padding: 24px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.editable-section__header {
+.teacher-page .editable-section__header{
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.editable-section__title {
+.teacher-page .editable-section__title{
     font-size: 18px;
     font-weight: 500;
     color: #212529;
     margin: 0;
 }
 
-.editable-section__meta {
+.teacher-page .editable-section__meta{
     display: flex;
     gap: 12px;
     font-size: 12px;
@@ -444,12 +970,12 @@ body {
 }
 
 /* Стили для выпадающих списков */
-.dropdown {
+.teacher-page .dropdown{
     position: relative;
     display: inline-block;
 }
 
-.dropdown__toggle {
+.teacher-page .dropdown__toggle{
     display: flex;
     align-items: center;
     gap: 8px;
@@ -464,26 +990,26 @@ body {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.dropdown__toggle:hover {
+.teacher-page .dropdown__toggle:hover{
     background-color: #e9ecef;
     transform: translateY(-1px);
 }
 
-.dropdown__toggle--active {
+.teacher-page .dropdown__toggle--active{
     background-color: #e9ecef;
 }
 
-.dropdown__icon {
+.teacher-page .dropdown__icon{
     width: 12px;
     height: 12px;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.dropdown__toggle--active .dropdown__icon {
+.teacher-page .dropdown__toggle--active .dropdown__icon{
     transform: rotate(180deg);
 }
 
-.dropdown__menu {
+.teacher-page .dropdown__menu{
     position: absolute;
     top: 100%;
     left: 0;
@@ -500,13 +1026,13 @@ body {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.dropdown__menu--active {
+.teacher-page .dropdown__menu--active{
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-.dropdown__item {
+.teacher-page .dropdown__item{
     display: flex;
     align-items: center;
     gap: 8px;
@@ -518,20 +1044,19 @@ body {
     color: #495057;
 }
 
-.dropdown__item:hover {
+.teacher-page .dropdown__item:hover{
     background-color: #f8f9fa;
     transform: translateX(2px);
 }
 
-.dropdown__item input[type="checkbox"] {
+.teacher-page .dropdown__item input[type="checkbox"]{
     margin: 0;
     width: 14px;
     height: 14px;
     transition: all 0.2s ease;
 }
 
-.editable-section__status,
-.editable-section__subject {
+.teacher-page .editable-section__status, .teacher-page .editable-section__subject{
     font-weight: 500;
     font-size: 12px;
     display: flex;
@@ -543,13 +1068,13 @@ body {
 }
 
 /* Стили карточек материалов */
-.editable-section__cards {
+.teacher-page .editable-section__cards{
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.material-card {
+.teacher-page .material-card{
     background: #F8F9FA;
     border-radius: 16px;
     padding: 12px 16px;
@@ -561,18 +1086,18 @@ body {
     text-decoration: none;
 }
 
-.material-card:hover {
+.teacher-page .material-card:hover{
     border-color: #007BFF;
     box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
 }
 
-.material-card__header {
+.teacher-page .material-card__header{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
 }
 
-.material-card__subject {
+.teacher-page .material-card__subject{
     font-size: 12px;
     font-weight: 500;
     color: #212529;
@@ -581,20 +1106,20 @@ body {
     padding: 2px 6px;
 }
 
-.material-card__subject--social {
+.teacher-page .material-card__subject--social{
     color: #FF831D;
     background-color: #FBEDE9;
 }
-.material-card__subject--chemistry {
+.teacher-page .material-card__subject--chemistry{
     color: #EE215B;
     background-color: #FDE4EB;
 }
-.material-card__subject--astronomy {
+.teacher-page .material-card__subject--astronomy{
     color: #6741F1;
     background-color: #EFE9FD;
 }
 
-.material-card__status {
+.teacher-page .material-card__status{
     display: flex;
     padding: 4px 12px;
     border-radius: 32px;
@@ -604,46 +1129,46 @@ body {
 }
 
 /* Статусы */
-.material-card__status--draft {
+.teacher-page .material-card__status--draft{
     background: #DEE2E6;
     color: #495057;
 }
 
-.material-card__status--publication {
+.teacher-page .material-card__status--publication{
     background: #DEF4F2;
     color: #00937D;
 }
 
-.material-card__status--moderation {
+.teacher-page .material-card__status--moderation{
     background: #FCF8C7;
     color: #EEA838;
 }
 
-.material-card__body {
+.teacher-page .material-card__body{
     display: flex;
     justify-content: space-between;
 }
 
-.material-card__title {
+.teacher-page .material-card__title{
     font-size: 14px;
     font-weight: 500;
     color: #212529;
     line-height: 1.4;
 }
 
-.material-card__update {
+.teacher-page .material-card__update{
     color: #6C757D;
     font-size: 12px;
     font-weight: 500;
 }
 
-.material-card__footer {
+.teacher-page .material-card__footer{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.material-card__path {
+.teacher-page .material-card__path{
     font-size: 12px;
     font-weight: 400;
     color: #495057;
@@ -651,7 +1176,7 @@ body {
     margin: 0;
 }
 
-.material-card__arrow {
+.teacher-page .material-card__arrow{
     width: 20px;
     height: 20px;
     margin-left: 12px;
@@ -659,61 +1184,61 @@ body {
     transition: opacity 0.2s ease;
 }
 
-.material-card:hover .material-card__arrow {
+.teacher-page .material-card:hover .material-card__arrow{
     opacity: 1;
 }
 
 /* Адаптивность */
-@media (max-width: 768px) {
-    .editable-section {
+@media (max-width: 768px){
+    .teacher-page .editable-section{
         padding: 16px;
     }
     
-    .editable-section__header {
+    .teacher-page .editable-section__header{
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
     }
     
-    .editable-section__meta {
+    .teacher-page .editable-section__meta{
         gap: 20px;
     }
     
-    .material-card {
+    .teacher-page .material-card{
         padding: 16px;
     }
     
-    .material-card__header {
+    .teacher-page .material-card__header{
         flex-direction: column;
         gap: 8px;
     }
     
-    .material-card__status {
+    .teacher-page .material-card__status{
         align-self: flex-start;
     }
 }
 
 
-.compilation {
+.teacher-page .compilation{
   background-color: white;
   border-radius: 16px;
   padding: 24px 18px;
 }
 
-.compilation__title {
+.teacher-page .compilation__title{
   font-size: 18px;
   font-weight: 500;
   color: #212529;
   margin-bottom: 20px;
 }
 
-.compilation__three-cards {
+.teacher-page .compilation__three-cards{
     display: flex;
     gap: 16px;
   }
 
 /* Общие стили для карточек */
-.compilation__card {
+.teacher-page .compilation__card{
     flex: 1;
     border-radius: 16px;
     background-color: #F1F2F4;
@@ -725,7 +1250,7 @@ body {
 }
 
 /* Заголовки карточек */
-.compilation__card-title {
+.teacher-page .compilation__card-title{
     font-size: 16px;
     font-weight: 500;
     margin-top: 4px;
@@ -736,7 +1261,7 @@ body {
 }
 
 /* Текстовые стили */
-.compilation__card-text {
+.teacher-page .compilation__card-text{
     font-size: 12px;
     font-weight: 500;
     color: #6C757D;
@@ -744,22 +1269,22 @@ body {
     margin-bottom: 12px;
 }
 
-.compilation__button-text {
+.teacher-page .compilation__button-text{
     margin: 0;
     font-size: 16px;
     font-weight: 500;
     color: black;
 }
 
-.compilation__button-icon {
+.teacher-page .compilation__button-icon{
     transition: var(--transition);
 }
 
-.compilation__card-button:hover .compilation__button-icon {
+.teacher-page .compilation__card-button:hover .compilation__button-icon{
     transform: rotate(45deg);
 }
 
-.compilation__card-button:hover {
+.teacher-page .compilation__card-button:hover{
     background-color: #F8F9FA;
 }
 
@@ -767,26 +1292,27 @@ body {
    PART # - CHOICE
    ========================================================================== */
 
-.choice {
+.teacher-page .choice{
+  margin: 0; 
   background-color: var(--background-white);
   border-radius: 16px;
   padding: 24px 24px 32px 24px;
 }
 
-.choice__title {
+.teacher-page .choice__title{ 
   font-size: 18px;
   font-weight: 500;
   color: var(--primary-dark);
 }
 
-.choice__line {
+.teacher-page .choice__line{
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 32px; 
 }
 
-.choice__all {
+.teacher-page .choice__all{
   display: flex;
   color: var(--text-gray);
   text-decoration: none;
@@ -794,18 +1320,18 @@ body {
   gap: 4px;
 }
 
-.choice__all-text {
+.teacher-page .choice__all-text{
   font-size: 16px;
   font-weight: 400;
 }
 
-.choice__all-icon {
+.teacher-page .choice__all-icon{
   width: 19px;
   height: 19px;
   transition: transform 0.5s ease; /* плавный переход */
 }
 
-.choice__all:hover .choice__all-icon {
+.teacher-page .choice__all:hover .choice__all-icon{
   transform: rotate(45deg); /* поворот при наведении */
 }
 
@@ -825,13 +1351,13 @@ body {
     overflow: hidden;
 }
 
-.choice__cards {
+.teacher-page .choice__cards{
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
 }
 
-.choice__card-text {
+.teacher-page .choice__card-text{
     font-size: 16px;
     font-weight: 400;
     max-width: 117px;
@@ -839,102 +1365,102 @@ body {
 
 /* Модификаторы для предметов */
 
-.choice__card {
+.teacher-page .choice__card{
     background-size: 45% auto;
 }
-.choice__card:hover {
+.teacher-page .choice__card:hover{
     background-size: 45% auto; /* чуть больше при наведении */
 }
 
-.choice__card--math {
-    background-image: url(../img/svg/math-1.svg);
+.teacher-page .choice__card--math{
+    background-image: url(/img/svg/math-1.svg);
 }
-.choice__card--math:hover {
-    background-image: url(../img/svg/math-2.svg);
-}
-
-.choice__card--biology {
-    background-image: url(../img/svg/biology-1.png);
-}
-.choice__card--biology:hover {
-    background-image: url(../img/svg/biology-2.png);
+.teacher-page .choice__card--math:hover{
+    background-image: url(/img/svg/math-2.svg);
 }
 
-.choice__card--history {
-    background-image: url(../img/svg/history-1.svg);
+.teacher-page .choice__card--biology{
+    background-image: url(/img/svg/biology-1.png);
 }
-.choice__card--history:hover {
-    background-image: url(../img/svg/history-2.svg);
-}
-
-.choice__card--social {
-    background-image: url(../img/svg/social-1.svg);
-}
-.choice__card--social:hover {
-    background-image: url(../img/svg/social-2.svg);
+.teacher-page .choice__card--biology:hover{
+    background-image: url(/img/svg/biology-2.png);
 }
 
-.choice__card--chemistry {
-    background-image: url(../img/svg/chemistry-1.svg);
+.teacher-page .choice__card--history{
+    background-image: url(/img/svg/history-1.svg);
 }
-.choice__card--chemistry:hover {
-    background-image: url(../img/svg/chemistry-2.svg);
-}
-
-.choice__card--informatics {
-    background-image: url(../img/svg/informatics-1.svg);
-}
-.choice__card--informatics:hover {
-    background-image: url(../img/svg/informatics-2.svg);
+.teacher-page .choice__card--history:hover{
+    background-image: url(/img/svg/history-2.svg);
 }
 
-.choice__card--astronomy {
-    background-image: url(../img/svg/astronomy-1.png);
+.teacher-page .choice__card--social{
+    background-image: url(/img/svg/social-1.svg);
 }
-.choice__card--astronomy:hover {
-    background-image: url(../img/svg/astronomy-2.png);
-}
-
-.choice__card--literature {
-    background-image: url(../img/svg/literature-1.svg);
-}
-.choice__card--literature:hover {
-    background-image: url(../img/svg/literature-2.svg);
+.teacher-page .choice__card--social:hover{
+    background-image: url(/img/svg/social-2.svg);
 }
 
-.choice__card--english {
-    background-image: url(../img/svg/english-1.svg);
+.teacher-page .choice__card--chemistry{
+    background-image: url(/img/svg/chemistry-1.svg);
 }
-.choice__card--english:hover {
-    background-image: url(../img/svg/english-2.svg);
-}
-
-.choice__card--russian {
-    background-image: url(../img/svg/russian-1.svg);
-}
-.choice__card--russian:hover {
-    background-image: url(../img/svg/russian-2.svg);
+.teacher-page .choice__card--chemistry:hover{
+    background-image: url(/img/svg/chemistry-2.svg);
 }
 
-.choice__card--geography {
-    background-image: url(../img/svg/geography-1.svg);
+.teacher-page .choice__card--informatics{
+    background-image: url(/img/svg/informatics-1.svg);
 }
-.choice__card--geography:hover {
-    background-image: url(../img/svg/geography-2.svg);
+.teacher-page .choice__card--informatics:hover{
+    background-image: url(/img/svg/informatics-2.svg);
 }
 
-.choice__card--physics {
-    background-image: url(../img/svg/physics-1.svg);
+.teacher-page .choice__card--astronomy{
+    background-image: url(/img/svg/astronomy-1.png);
 }
-.choice__card--physics:hover {
-    background-image: url(../img/svg/physics-2.svg);
+.teacher-page .choice__card--astronomy:hover{
+    background-image: url(/img/svg/astronomy-2.png);
+}
+
+.teacher-page .choice__card--literature{
+    background-image: url(/img/svg/literature-1.svg);
+}
+.teacher-page .choice__card--literature:hover{
+    background-image: url(/img/svg/literature-2.svg);
+}
+
+.teacher-page .choice__card--english{
+    background-image: url(/img/svg/english-1.svg);
+}
+.teacher-page .choice__card--english:hover{
+    background-image: url(/img/svg/english-2.svg);
+}
+
+.teacher-page .choice__card--russian{
+    background-image: url(/img/svg/russian-1.svg);
+}
+.teacher-page .choice__card--russian:hover{
+    background-image: url(/img/svg/russian-2.svg);
+}
+
+.teacher-page .choice__card--geography{
+    background-image: url(/img/svg/geography-1.svg);
+}
+.teacher-page .choice__card--geography:hover{
+    background-image: url(/img/svg/geography-2.svg);
+}
+
+.teacher-page .choice__card--physics{
+    background-image: url(/img/svg/physics-1.svg);
+}
+.teacher-page .choice__card--physics:hover{
+    background-image: url(/img/svg/physics-2.svg);
 }
 
 /* ==========================================================================
    PART # - MAIN__RIGHT
    ========================================================================== */
 
-.main__right {
+.teacher-page .main__right{
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -942,7 +1468,7 @@ body {
 
 /* Карточка статистики */
 
-.stats-card {
+.teacher-page .stats-card{
     background: #FFFFFF;
     border-radius: 16px;
     padding: 20px 24px 24px;
@@ -952,27 +1478,27 @@ body {
     gap: 16px;
 }
 
-.stats-card__header {
+.teacher-page .stats-card__header{
     display: flex;
     justify-content: space-between;
     gap: 16px;
     align-items: center;
 }
 
-.stats-card__title {
+.teacher-page .stats-card__title{
     font-size: 18px;
     font-weight: 700;
     margin: 0;
     color: var(--text-dark);
 }
 
-.stats-card__controls {
+.teacher-page .stats-card__controls{
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.stats-card__select {
+.teacher-page .stats-card__select{
     border-radius: 999px;
     border: 1px solid #E0E3EB;
     padding: 6px 10px;
@@ -984,12 +1510,12 @@ body {
     cursor: pointer;
 }
 
-.stats-card__select-icon {
+.teacher-page .stats-card__select-icon{
     width: 12px;
     height: 12px;
 }
 
-.stats-card__tabs {
+.teacher-page .stats-card__tabs{
     background: #F3F4F8;
     border-radius: 999px;
     padding: 2px;
@@ -997,7 +1523,7 @@ body {
     gap: 2px;
 }
 
-.stats-card__tab {
+.teacher-page .stats-card__tab{
     border: none;
     background: transparent;
     border-radius: 999px;
@@ -1006,12 +1532,12 @@ body {
     cursor: pointer;
 }
 
-.stats-card__tab--active {
+.teacher-page .stats-card__tab--active{
     background: #FFFFFF;
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
-.stats-card__chart {
+.teacher-page .stats-card__chart{
     position: relative;
     height: 160px;
     border-radius: 16px;
@@ -1019,7 +1545,7 @@ body {
     overflow: hidden;
 }
 
-.stats-card__chart-line {
+.teacher-page .stats-card__chart-line{
     position: absolute;
     inset: 50% 8px auto 8px;
     height: 2px;
@@ -1028,7 +1554,7 @@ body {
     transform: translateY(-40px) rotate(-5deg);
 }
 
-.stats-card__chart-point {
+.teacher-page .stats-card__chart-point{
     position: absolute;
     right: 40px;
     top: 40%;
@@ -1039,32 +1565,32 @@ body {
     border: 3px solid var(--primary-blue);
 }
 
-.stats-card__footer {
+.teacher-page .stats-card__footer{
     display: flex;
     gap: 32px;
     margin-top: 8px;
 }
 
-.stats-card__metric-label {
+.teacher-page .stats-card__metric-label{
     font-size: 11px;
     color: var(--text-gray);
     text-transform: uppercase;
     letter-spacing: 0.04em;
 }
 
-.stats-card__metric-value {
+.teacher-page .stats-card__metric-value{
     font-size: 18px;
     font-weight: 700;
     color: var(--text-dark);
 }
 
-.stats-card__metric-value--accent {
+.teacher-page .stats-card__metric-value--accent{
     color: #1AA552;
 }
 
 /* Промо-карточка */
 
-.promo-card {
+.teacher-page .promo-card{
     position: relative;
     border-radius: 20px;
     padding: 20px 24px;
@@ -1077,19 +1603,19 @@ body {
     box-shadow: var(--shadow-card);
 }
 
-.promo-card__title {
+.teacher-page .promo-card__title{
     margin: 0 0 4px;
     font-size: 18px;
     font-weight: 700;
 }
 
-.promo-card__subtitle {
+.teacher-page .promo-card__subtitle{
     margin: 0;
     font-size: 13px;
     opacity: 0.9;
 }
 
-.promo-card__illustration {
+.teacher-page .promo-card__illustration{
     width: 120px;
     height: 80px;
     flex-shrink: 0;
@@ -1100,7 +1626,7 @@ body {
 
 /* Популярные преподаватели */
 
-.teachers-card {
+.teacher-page .teachers-card{
     background: #FFFFFF;
     border-radius: 16px;
     padding: 20px 24px;
@@ -1110,19 +1636,19 @@ body {
     gap: 16px;
 }
 
-.teachers-card__header {
+.teacher-page .teachers-card__header{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.teachers-card__title {
+.teacher-page .teachers-card__title{
     margin: 0;
     font-size: 18px;
     font-weight: 700;
 }
 
-.teachers-card__all {
+.teacher-page .teachers-card__all{
     border: none;
     background: transparent;
     display: inline-flex;
@@ -1133,12 +1659,12 @@ body {
     cursor: pointer;
 }
 
-.teachers-card__all-icon {
+.teacher-page .teachers-card__all-icon{
     width: 14px;
     height: 14px;
 }
 
-.teachers-card__list {
+.teacher-page .teachers-card__list{
     list-style: none;
     margin: 0;
     padding: 0;
@@ -1147,7 +1673,7 @@ body {
     gap: 12px;
 }
 
-.teacher {
+.teacher-page .teacher{
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 12px;
@@ -1157,80 +1683,80 @@ body {
     background: #F9FAFC;
 }
 
-.teacher__avatar {
+.teacher-page .teacher__avatar{
     width: 44px;
     height: 44px;
     border-radius: 12px;
     object-fit: cover;
 }
 
-.teacher__content {
+.teacher-page .teacher__content{
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.teacher__top {
+.teacher-page .teacher__top{
     display: flex;
     justify-content: space-between;
     gap: 8px;
 }
 
-.teacher__info {
+.teacher-page .teacher__info{
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.teacher__name {
+.teacher-page .teacher__name{
     font-size: 13px;
     font-weight: 600;
 }
 
-.teacher__tags {
+.teacher-page .teacher__tags{
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
 }
 
-.teacher-tag {
+.teacher-page .teacher-tag{
     font-size: 11px;
     padding: 2px 8px;
     border-radius: 999px;
     background: #EEF1F8;
 }
 
-.teacher-tag--blue {
+.teacher-page .teacher-tag--blue{
     background: #E8EEFF;
     color: #2F54EB;
 }
 
-.teacher-tag--blue-light {
+.teacher-page .teacher-tag--blue-light{
     background: #EAF3FF;
     color: #1D7EEB;
 }
 
-.teacher-tag--green {
+.teacher-page .teacher-tag--green{
     background: #E8F8F0;
     color: #1AA552;
 }
 
-.teacher-tag--orange {
+.teacher-page .teacher-tag--orange{
     background: #FFF1E5;
     color: #FF831D;
 }
 
-.teacher-tag--yellow {
+.teacher-page .teacher-tag--yellow{
     background: #FFF7D6;
     color: #D49C06;
 }
 
-.teacher-tag--purple {
+.teacher-page .teacher-tag--purple{
     background: #F2EBFF;
     color: #7B61FF;
 }
 
-.teacher__stats {
+.teacher-page .teacher__stats{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -1238,24 +1764,24 @@ body {
     font-size: 12px;
 }
 
-.teacher__stat {
+.teacher-page .teacher__stat{
     display: inline-flex;
     align-items: center;
     gap: 4px;
 }
 
-.teacher__stat-icon {
+.teacher-page .teacher__stat-icon{
     font-size: 12px;
 }
 
-.teacher__bottom {
+.teacher-page .teacher__bottom{
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 8px;
 }
 
-.teacher-label {
+.teacher-page .teacher-label{
     font-size: 11px;
     padding: 2px 8px;
     border-radius: 999px;
@@ -1263,7 +1789,7 @@ body {
     color: #D49C06;
 }
 
-.teacher__materials {
+.teacher-page .teacher__materials{
     display: inline-flex;
     align-items: center;
     gap: 4px;

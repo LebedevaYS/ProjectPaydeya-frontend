@@ -103,6 +103,18 @@ body {
   list-style: none;
 }
 
+.header__logo-link {
+    width: 43px;
+    height: 43px;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-0.68deg);
+    transition: transform 0.5s ease;
+}
+
 .header__link {
   text-decoration: none;
   color: var(--text-dark);
@@ -153,13 +165,13 @@ body {
 
 .intro {
   padding: 32px 48px 64px 48px;
-  margin-top: 40px;
+  margin-top: 0px;
   background-color: var(--background-white);
   border-radius: 12px;
   background-image: url(../img/svg/star1.svg), url(../img/svg/star2.svg), url(../img/svg/book.svg), url(../img/svg/biglogo.svg);
   background-repeat: no-repeat, no-repeat;
   background-position: bottom 72% right 32%, bottom 33% right 5%, bottom 54% right 5%, bottom 0 right 0;
-  background-size: 35px, 59px, 440px, contain;
+  background-size: px, 59px, 440px, contain;
 }
 
 .intro__comm {
@@ -796,6 +808,7 @@ body {
 
 /* Кнопка */
 .teachers__card-button {
+    margin-top: 18px;
     display: inline-flex;
     align-items: center;
     padding: 12px 24px;
