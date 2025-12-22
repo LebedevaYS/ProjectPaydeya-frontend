@@ -1,0 +1,2551 @@
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('../fonts/Gilroy-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('../fonts/Gilroy-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+/* ==========================================================================
+   MAIN_STUDENT.CSS
+   Стили для личного кабинета ученика
+   ========================================================================== */
+
+
+.student-page body {
+    font-family: var(--font-sans-dashboard);
+    font-style: normal;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-dark);
+    background: var(--background-light);
+    line-height: var(--lh-13);
+}
+
+
+.student-page .container {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+.student-page .sidebar--left {
+    max-width: 220px;
+    background-color: var(--background-white);
+    padding: 24px 0px 32px 0px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+
+.student-page .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+.student-page .sidebar-nav__header {
+    padding: 4px 24px;
+}
+
+
+.student-page .sidebar-nav__menu-container {
+    position: relative;
+    margin-top: 32px;
+    flex-grow: 1;
+}
+
+
+.student-page .sidebar-nav__menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+}
+
+
+.student-page .sidebar-nav__item {
+    display: flex;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+
+.student-page .sidebar-nav__icon-wrapper {
+    position: relative;
+    width: 20px;
+    height: 20px;
+}
+
+
+.student-page .sidebar-nav__icon {
+    max-width: 20px;
+    max-height: 20px;
+    transition: all 0.2s ease;
+}
+
+
+.student-page .sidebar-nav__icon--default {
+    opacity: 1;
+}
+
+
+.student-page .sidebar-nav__icon--hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+
+.student-page .sidebar-nav__link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 16px;
+    font-weight: 400;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 24px;
+    gap: 12px;
+}
+
+/* Анимированная полоска */
+
+.student-page .sidebar-nav__slider {
+    position: absolute;
+    left: 0;
+    width: 4px;
+    background-color: var(--primary-blue);
+    border-radius: 0 2px 2px 0;
+    transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    top: 0;
+}
+
+
+.student-page .sidebar-nav__link--active {
+    color: var(--primary-blue);
+    font-weight: 500;
+}
+
+
+.student-page .sidebar-nav__link--active .sidebar-nav__icon--default {
+    opacity: 0;
+}
+
+
+.student-page .sidebar-nav__link--active .sidebar-nav__icon--hover {
+    opacity: 1;
+}
+
+/* Ховер эффекты для ссылки */
+
+.student-page .sidebar-nav__link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--primary-blue);
+}
+
+
+.student-page .sidebar-nav__link:hover .sidebar-nav__icon--default {
+    opacity: 0;
+}
+
+
+.student-page .sidebar-nav__link:hover .sidebar-nav__icon--hover {
+    opacity: 1;
+}
+
+
+.student-page .sidebar-nav__promo {
+    margin: 0px 24px 0px 24px;
+    padding: 16px;
+    border-radius: 16px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    background: 
+        url(../img/svg/promo_logo.svg) no-repeat,
+        #4172F1;
+    background-size: auto 100%;
+    aspect-ratio: 172 / 200;
+}
+
+
+.student-page .sidebar-nav__promo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, 
+        rgba(64, 62, 190, 1.0) 0%,
+        rgba(65, 96, 222, 0.8) 50%,
+        rgba(65, 114, 241, 0.3) 80%,
+        rgba(65, 114, 241, 0) 100%);
+    pointer-events: none;
+}
+
+.sidebar-nav__promo-text,
+.sidebar-nav__promo-subtext,
+
+.student-page .sidebar-nav__promo-button {
+    position: relative;
+    z-index: 1;
+}
+
+
+.student-page .sidebar-nav__promo-text {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.sidebar-nav__promo-subtext,
+
+.student-page .sidebar-nav__promo-button {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.student-page .sidebar-nav__promo-subtext {
+  color: var(--accent-blue);
+  margin: 4px 0px 30px 0px;
+}
+
+
+.student-page .sidebar-nav__promo-button {
+    background-color: var(--background-white);
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    padding: 6px 42px;
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #212529;
+}
+
+
+.student-page .sidebar-nav__promo-button:hover {
+    background-color: #f0f0f0;
+}
+
+
+.student-page .sidebar-nav__link--help {
+    display: flex;
+    align-items: center;
+    padding: 10px 24px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 16px;
+    margin-top: 48px;
+    transition: color 0.3s ease;
+}
+
+
+.student-page .sidebar-nav__link--help:hover {
+    color: var(--primary-blue);
+}
+
+
+.student-page .sidebar-nav__help-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: 1px solid var(--text-dark);
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 400;
+    margin-right: 8px;
+    flex-shrink: 0;
+    color: var(--text-dark);
+}
+
+
+.student-page .sidebar-nav__link--help:hover .sidebar-nav__help-icon {
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+}
+
+
+.student-page .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 32px 41px 24px;
+    width: 100%;
+}
+
+
+.student-page .header {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+
+.student-page .main {
+    display: block;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+
+.student-page .main__left {
+    gap:24px;
+    width: 65%;
+}
+
+/* Поисковая строка */
+
+.student-page .search {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+
+.student-page .search__field {
+    width: 100%;
+    padding: 12px 16px 12px 42px;
+    border-radius: 16px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    background: var(--background-white);
+    transition: var(--transition);
+    border: none;
+    line-height: 1.5;
+}
+
+
+.student-page .search__field:focus {
+    outline: none;
+}
+
+
+.student-page .search__field::placeholder {
+    color: var(--text-gray);
+}
+
+
+.student-page .search::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M8.25 14.25C11.5637 14.25 14.25 11.5637 14.25 8.25C14.25 4.93629 11.5637 2.25 8.25 2.25C4.93629 2.25 2.25 4.93629 2.25 8.25C2.25 11.5637 4.93629 14.25 8.25 14.25Z' stroke='%236C757D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Cpath d='M15.75 15.75L12.4875 12.4875' stroke='%236C757D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
+    z-index: 2;
+}
+
+/* Правая часть шапки */
+
+.student-page .header__right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: flex-end;
+}
+
+/* Уведомления */
+
+.student-page .notification {
+    position: relative;
+    background: var(--background-white);
+    border: none;
+    padding: 13px 14px;
+    cursor: pointer;
+    border-radius: 16px;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-white);
+    border-radius: 16px;
+}
+
+
+.student-page .notification-badge {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    width: 12px;
+    height: 12px;
+}
+
+
+.student-page .notification:hover {
+    background: var(--background-light);
+}
+
+/* Профиль */
+
+.student-page .user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: var(--background-white);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+
+.student-page .user:hover {
+    background: var(--background-light);
+}
+
+
+.student-page .user__avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+
+.student-page .user__name {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #212529;
+    line-height: 1.2;
+}
+
+/* ==========================================================================
+   PART # - MAIN__LEFT
+   ========================================================================== */
+
+
+.student-page .main__left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+/* ==========================================================================
+   PART # - CHOICE
+   ========================================================================== */
+
+.student-page .choice {
+  background-color: var(--background-white);
+  border-radius: 16px;
+  padding: 24px 24px 32px 24px;
+  min-height: 362px;
+  display: flex;
+  flex-direction: column;
+}
+
+.student-page .choice__title {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.student-page .choice__line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.student-page .choice__all {
+  display: flex;
+  color: var(--text-gray);
+  text-decoration: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.student-page .choice__all-text {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.student-page .choice__all-icon {
+  width: 19px;
+  height: 19px;
+  transition: transform 0.3s ease;
+  transform: rotate(-45deg);
+}
+
+.student-page .choice__all:hover .choice__all-icon {
+  transform: rotate(0deg);
+}
+
+.student-page .choice__cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.student-page .choice__card {
+  aspect-ratio: 169 / 78;
+  padding: 10px 48px 24px 12px;
+  border-radius: 8px;
+  background: #ffffff;
+  text-decoration: none;
+  color: var(--text-dark);
+  display: flex;
+  align-items: flex-start;
+  box-shadow: var(--shadow-card);
+  background-repeat: no-repeat;
+  background-position: bottom 0% right 0%;
+  background-size: 45% auto; /* Базовый размер */
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.student-page .choice__card-text {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 0;
+  max-width: 65%;
+}
+
+.student-page .choice__card--informatics .choice__card-text {
+  hyphens: auto;
+}
+
+.student-page .choice__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Специальные стили для больших экранов (увеличиваем текст) */
+@media (min-width: 1600px) {
+  .student-page .choice__card-text {
+    font-size: 24px; /* Увеличили текст на больших экранах */
+  }
+
+  .student-page .choice__card {
+    background-size: 50% auto; /* Немного увеличиваем иконки */
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE - Адаптация (только choice карточки)
+   ========================================================================== */
+
+@media (max-width: 1200px) {
+  .student-page .choice__cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .student-page .choice {
+    min-height: 400px;
+  }
+
+  .student-page .choice__card-text {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .student-page .choice__cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .student-page .choice {
+    min-height: 480px;
+  }
+
+  .student-page .choice__card {
+    padding: 10px 40px 22px 12px;
+  }
+
+  .student-page .choice__card-text {
+    font-size: 16px;
+    max-width: 70%;
+  }
+}
+
+@media (max-width: 768px) {
+  .student-page .choice {
+    padding: 20px 16px;
+    min-height: 520px;
+  }
+
+  .student-page .choice__cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .student-page .choice__card {
+    padding: 8px 36px 20px 10px;
+    background-size: 40% auto; /* Чуть меньше на мобильных */
+  }
+
+  .student-page .choice__card-text {
+    font-size: 15px;
+    max-width: 75%;
+    line-height: 1.25;
+  }
+}
+
+@media (max-width: 480px) {
+  .student-page .choice__cards {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .student-page .choice {
+    min-height: auto;
+    padding-bottom: 24px;
+  }
+
+  .student-page .choice__card {
+    aspect-ratio: 169 / 70;
+    padding: 10px 44px 20px 12px;
+    background-size: 35% auto; /* Еще меньше на очень маленьких экранах */
+  }
+
+  .student-page .choice__card-text {
+    font-size: 16px;
+    max-width: 80%;
+  }
+}
+
+/* Модификаторы для всех предметов (12 предметов) */
+
+.student-page .choice__card--informatics {
+  background-image: url(../img/svg/informatics-1.svg);
+}
+.student-page .choice__card--informatics:hover {
+  background-image: url(../img/svg/informatics-2.svg);
+}
+
+.student-page .choice__card--math {
+  background-image: url(../img/svg/math-1.svg);
+}
+.student-page .choice__card--math:hover {
+  background-image: url(../img/svg/math-2.svg);
+}
+
+.student-page .choice__card--biology {
+  background-image: url(../img/svg/biology-1.png);
+}
+.student-page .choice__card--biology:hover {
+  background-image: url(../img/svg/biology-2.png);
+}
+
+.student-page .choice__card--history {
+  background-image: url(../img/svg/history-1.svg);
+}
+.student-page .choice__card--history:hover {
+  background-image: url(../img/svg/history-2.svg);
+}
+
+.student-page .choice__card--social {
+  background-image: url(../img/svg/social-1.svg);
+}
+.student-page .choice__card--social:hover {
+  background-image: url(../img/svg/social-2.svg);
+}
+
+.student-page .choice__card--chemistry {
+  background-image: url(../img/svg/chemistry-1.svg);
+}
+.student-page .choice__card--chemistry:hover {
+  background-image: url(../img/svg/chemistry-2.svg);
+}
+
+.student-page .choice__card--astronomy {
+  background-image: url(../img/svg/astronomy-1.png);
+}
+.student-page .choice__card--astronomy:hover {
+  background-image: url(../img/svg/astronomy-2.png);
+}
+
+.student-page .choice__card--literature {
+  background-image: url(../img/svg/literature-1.svg);
+}
+.student-page .choice__card--literature:hover {
+  background-image: url(../img/svg/literature-2.svg);
+}
+
+.student-page .choice__card--english {
+  background-image: url(../img/svg/english-1.svg);
+}
+.student-page .choice__card--english:hover {
+  background-image: url(../img/svg/english-2.svg);
+}
+
+.student-page .choice__card--russian {
+  background-image: url(../img/svg/russian-1.svg);
+}
+.student-page .choice__card--russian:hover {
+  background-image: url(../img/svg/russian-2.svg);
+}
+
+.student-page .choice__card--geography {
+  background-image: url(../img/svg/geography-1.svg);
+}
+.student-page .choice__card--geography:hover {
+  background-image: url(../img/svg/geography-2.svg);
+}
+
+.student-page .choice__card--physics {
+  background-image: url(../img/svg/physics-1.svg);
+}
+.student-page .choice__card--physics:hover {
+  background-image: url(../img/svg/physics-2.svg);
+}
+
+
+/* ==========================================================================
+   PART # - EDITABLE SECTION (Продолжить обучение)
+   ========================================================================== */
+
+
+.student-page .editable-section {
+    background: var(--background-white);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    
+}
+
+
+.student-page .editable-section__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+.student-page .editable-section__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.student-page .editable-section__title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-dark);
+    
+}
+
+
+.student-page .editable-section__nav {
+    display: flex;
+    gap: 8px;
+}
+
+
+.student-page .editable-section__nav-button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+
+.student-page .editable-section__nav-button:hover:not(:disabled) {
+    opacity: 0.7;
+}
+
+
+.student-page .editable-section__nav-button:disabled {
+    cursor: not-allowed;
+}
+
+
+.student-page .editable-section__cards-container {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 233px; /* Фиксированная ширина карточек */
+    gap: 12px;
+    padding: 4px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Скрыть скроллбар */
+}
+
+
+.student-page .editable-section__cards-container::-webkit-scrollbar {
+    display: none; /* Скрыть скроллбар в WebKit */
+}
+
+
+/* Обертка для карточек, которая будет двигаться */
+
+.student-page .editable-section__cards {
+    display: flex;
+    gap: 12px;
+    transition: transform 0.3s ease;
+    /* Добавь это: */
+    width: max-content; 
+    padding: 4px 0;/* Ширина равна сумме всех карточек */
+}
+
+/* Сами карточки (размер фиксирован) */
+
+.student-page .editable-section__card {
+    width: 233px;
+    height: 256px;
+    flex-shrink: 0; /* Карточки не должны сжиматься */
+}
+
+/* ==========================================================================
+   MATERIAL CARD - иконки через position absolute
+   ========================================================================== */
+
+
+.student-page .material-card {
+    background: #F8F9FA;
+    border-radius: 16px;
+    padding: 16px;
+    transition: var(--transition);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-decoration: none;
+    border: 2px solid transparent;
+    max-width: 233px;
+    height: 256px;
+    flex-shrink: 0;
+    width: 100%;
+    position: relative; /* Важно для absolute дочерних элементов */
+    overflow: hidden; /* Чтобы иконка не выходила за границы */
+}
+
+/* Контейнер для иконки */
+
+.student-page .material-card__icon {
+    position: absolute;
+    top: -50px;
+    right: -35px;
+    width: 114px;
+    height: 114px;
+    z-index: 1;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+/* Сама иконка */
+
+.student-page .material-card__icon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+/* Поворот иконки на 30 градусов */
+
+.student-page .material-card__icon-img {
+    transform: rotate(-30deg);
+}
+
+/* Hover эффекты для иконки */
+
+.student-page .material-card:hover .material-card__icon {
+    opacity: 1;
+}
+
+
+
+/* Чтобы контент карточки был поверх иконки */
+.material-card__header,
+.material-card__body,
+
+.student-page .material-card__progress-wrapper {
+    position: relative;
+    z-index: 2;
+}
+
+/* Hover эффект для всей карточки */
+
+.student-page .material-card:hover {
+    border-color: var(--primary-blue);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+/* Убираем старые иконки из HTML */
+
+.student-page .material-card__subject-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Бейджик предмета - оставляем цветной */
+
+.student-page .material-card__subject {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    border-radius: 32px;
+    padding: 4px 12px;
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Информатика - фиолетовый */
+
+.student-page .material-card__subject--informatics {
+    color: #7B61FF; /* Фиолетовые буквы */
+    background-color: #F2EBFF; /* Светло-фиолетовый фон */
+}
+
+/* Математика - синий */
+
+.student-page .material-card__subject--math {
+    color: #4172F1; /* Синие буквы */
+    background-color: #E8EEFF; /* Светло-синий фон */
+}
+
+/* Биология - зеленый */
+
+.student-page .material-card__subject--biology {
+    color: #1AA552; /* Зеленые буквы */
+    background-color: #E8F8F0; /* Светло-зеленый фон */
+}
+
+/* История - желтый */
+
+.student-page .material-card__subject--history {
+    color: #D49C06; /* Желтые буквы */
+    background-color: #FFF7D6; /* Светло-желтый фон */
+}
+
+/* Обществознание - оранжевый */
+
+.student-page .material-card__subject--social {
+    color: #FF831D; /* Оранжевые буквы */
+    background-color: #FFF1E5; /* Светло-оранжевый фон */
+}
+
+/* Химия - розовый */
+
+.student-page .material-card__subject--chemistry {
+    color: #EE215B; /* Розовые буквы */
+    background-color: #FDE4EB; /* Розовый фон */
+}
+
+/* Астрономия - фиолетовый (как информатика) */
+
+.student-page .material-card__subject--astronomy {
+    color: #7B61FF; /* Фиолетовые буквы */
+    background-color: #F2EBFF; /* Светло-фиолетовый фон */
+}
+
+/* Литература - как химия */
+
+.student-page .material-card__subject--literature {
+    color: #EE215B; /* Розовые буквы */
+    background-color: #FDE4EB; /* Розовый фон */
+}
+
+/* Английский язык - оранжевый */
+
+.student-page .material-card__subject--english {
+    color: #FF831D; /* Оранжевые буквы */
+    background-color: #FFF1E5; /* Светло-оранжевый фон */
+}
+
+/* Русский язык - желтый */
+
+.student-page .material-card__subject--russian {
+    color: #D49C06; /* Желтые буквы */
+    background-color: #FFF7D6; /* Светло-желтый фон */
+}
+
+/* География - зеленый */
+
+.student-page .material-card__subject--geography {
+    color: #1AA552; /* Зеленые буквы */
+    background-color: #E8F8F0; /* Светло-зеленый фон */
+}
+
+/* Физика - синий */
+
+.student-page .material-card__subject--physics {
+    color: #4172F1; /* Синие буквы */
+    background-color: #E8EEFF; /* Светло-синий фон */
+}
+
+
+/* Тело карточки */
+
+.student-page .material-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+
+.student-page .material-card__title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-dark);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0;
+}
+
+
+.student-page .material-card__path {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-gray);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.4;
+}
+
+/* Прогресс */
+
+.student-page .material-card__progress-wrapper {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+
+.student-page .material-card__progress-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.student-page .progress-bar {
+    height: 8px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+
+.student-page .progress-fill {
+    height: 100%;
+    background: var(--primary-blue); /* Синий для всех */
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* ЦИФРЫ - темно-серые */
+
+.student-page .progress-text {
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 50px;
+    display: flex;
+    align-items: center;
+}
+
+
+.student-page .progress-text--current {
+    color: #495057; /* Темно-серый для пройденных уроков (было #212529) */
+}
+
+
+.student-page .progress-text--separator {
+    color: #6C757D; /* Серый для разделителя */
+    margin: 0 1px;
+}
+
+
+.student-page .progress-text--total {
+    color: #ADB5BD; /* Светло-серый для общего количества (было #6C757D) */
+}
+
+
+.student-page .material-card__progress-label {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-gray);
+    margin: 0;
+}
+
+/* Ховер эффекты для иконок */
+
+.student-page .material-card:hover .material-card__subject-icon--default {
+    opacity: 0;
+}
+
+
+.student-page .material-card:hover .material-card__subject-icon--hover {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   RECOMMENDED LESSONS (Подобрали для вас уроки)
+   ========================================================================== */
+
+
+.student-page .recommended-lessons {
+    background: var(--background-white);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+}
+
+
+.student-page .recommended-lessons__header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+
+.student-page .subjects-button {
+    display: flex;
+    align-items: center;
+    gap: 29px;
+    background-color: #F1F2F4;
+    border: none;
+    border-radius: 16px;
+    padding: 6px 12px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+.student-page .subjects-button:hover {
+    background: var(--background-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-button);
+}
+
+
+.student-page .subjects-button__icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+
+
+.student-page .subjects-button:hover .subjects-button__icon {
+    transform: rotate(180deg);
+}
+
+
+.student-page .recommended-lessons__title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+
+.student-page .recommended-lessons__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Расстояние между карточками уроков */
+}
+
+
+.student-page .lesson-card {
+    background: #F8F9FA;
+    border-radius: 12px;
+    padding: 12px 16px 12px 0px;
+    transition: var(--transition);
+    border-left: 4px solid transparent;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+
+.student-page .lesson-card__content{
+  width: 100%;
+}
+
+
+.student-page .lesson-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    background: var(--background-white);
+}
+
+
+.student-page .lesson-card__stats{
+  gap: 5px;
+}
+
+/* Иконка предмета */
+
+.student-page .lesson-card__icon {
+    width: 98px;
+    height: 98px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 98px 98px;
+    transition: var(--transition);
+}
+
+
+.student-page .lesson-card__eye-icon {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+
+.student-page .lesson-card__title-row{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.student-page .lesson-card--social .lesson-card__icon {
+    background-image: url('../img/svg/social-2.svg');
+}
+
+
+.student-page .lesson-card--chemistry .lesson-card__icon {
+    background-image: url('../img/svg/chemistry-2.svg');
+}
+
+
+.student-page .lesson-card--astronomy .lesson-card__icon {
+    background-image: url('../img/svg/astronomy-2.png');
+}
+
+
+
+.student-page .lesson-card__icon-img {
+    width: 122px;
+    height: 122px;
+    object-fit: contain;
+}
+
+
+.student-page .lesson-card:hover .lesson-card__icon {
+    transform: scale(1.05);
+}
+
+
+.student-page .lesson-card__subject-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-grow: 1;
+}
+
+
+.student-page .lesson-card__subject-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between
+}
+
+
+.student-page .lesson-card__subject {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+
+.student-page .lesson-card__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+
+.student-page .lesson-card__badge {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 16px;
+    white-space: nowrap;
+    background: #E9ECEF;
+    color: #495057;
+}
+
+
+
+.student-page .lesson-card__badge--editor {
+    display: flex;
+    gap: 4px;
+    background: #FEFDE8;
+    color: #EEA838;
+}
+
+
+.student-page .lesson-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+.student-page .lesson-card__title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin: 0;
+    line-height: 1.4;
+}
+
+
+.student-page .lesson-card__meta {
+    display: flex;
+    gap: 6px;
+    justify-content: space-between;
+    height: 16px;
+}
+
+
+.student-page .lesson-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.student-page .lesson-card__stars {
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+
+.student-page .lesson-card__path-row{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+.student-page .lesson-card__rating-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-gray);
+    width: 100%;
+    max-width: 102px;
+}
+
+
+.student-page .lesson-card__path {
+    font-size: 14px;
+    color: var(--text-gray-light);
+    line-height: 1.4;
+}
+
+
+.student-page .recommended-lessons__footer {
+    margin-top: 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--background-light);
+}
+
+
+.student-page .hug-stats {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-gray);
+}
+
+
+.student-page .hug-icon {
+    color: #e74c3c;
+    font-size: 18px;
+}
+
+
+.student-page .hug-text {
+    font-weight: 600;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+
+.student-page .recommended-lessons {
+        padding: 20px;
+        gap: 16px;
+    }
+    
+
+.student-page .lesson-card {
+        padding: 16px;
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+
+.student-page .lesson-card__icon {
+        width: 50px;
+        height: 50px;
+        padding: 8px;
+    }
+    
+
+.student-page .lesson-card__icon-img {
+        width: 34px;
+        height: 34px;
+    }
+    
+
+.student-page .lesson-card__subject-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+
+.student-page .lesson-card__badges {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+.student-page .recommended-lessons {
+        padding: 16px;
+    }
+    
+
+.student-page .lesson-card {
+        padding: 14px;
+    }
+    
+
+.student-page .lesson-card__subject {
+        font-size: 16px;
+    }
+    
+
+.student-page .lesson-card__title {
+        font-size: 15px;
+    }
+    
+
+.student-page .lesson-card__icon {
+        width: 44px;
+        height: 44px;
+    }
+    
+
+.student-page .lesson-card__icon-img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+
+
+/* ==========================================================================
+   PART # - MAIN__RIGHT
+   ========================================================================== */
+
+
+.student-page .main__right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+}
+
+/* Карточка статистики (Занятия 6 дней подряд) */
+
+.student-page .stats-card {
+    background: var(--background-white);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+.student-page .stats-card__header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+}
+
+
+.student-page .stats-card__title {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+    color: var(--text-dark);
+}
+
+
+.student-page .streak-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 0;
+}
+
+
+.student-page .streak-number {
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--primary-blue);
+    line-height: 1;
+    margin: 10px 0;
+}
+
+
+.student-page .streak-text {
+    font-size: 16px;
+    color: var(--text-gray);
+    margin-bottom: 20px;
+}
+
+
+.student-page .streak-button {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+
+.student-page .streak-button:hover {
+    background: #2a5bd7;
+    transform: translateY(-2px);
+}
+
+/* Промо карточка */
+
+.student-page .promo-card {
+    background: var(--background-white);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+.student-page .promo-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+.student-page .promo-card__title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+
+.student-page .promo-card__subtitle {
+    font-size: 14px;
+    color: var(--text-gray);
+    margin: 0;
+}
+
+
+.student-page .promo-card__button {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 8px;
+    width: fit-content;
+}
+
+
+.student-page .promo-card__button:hover {
+    background: #2a5bd7;
+    transform: translateY(-2px);
+}
+
+/* Популярные преподаватели */
+
+.student-page .teachers-card {
+    background: var(--background-white);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+.student-page .teachers-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.student-page .teachers-card__title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+.student-page .teachers-card__all {
+    border: none;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 16px;
+    color: var(--primary-blue);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+
+.student-page .teachers-card__all:hover {
+    gap: 8px;
+}
+
+
+.student-page .teachers-card__all-icon {
+    width: 14px;
+    height: 14px;
+}
+
+
+.student-page .teachers-card__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+.student-page .teacher {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px;
+    border-radius: 12px;
+    background: #F9FAFC;
+    transition: var(--transition);
+}
+
+
+.student-page .teacher:hover {
+    background: #F0F4FF;
+    transform: translateY(-2px);
+}
+
+
+.student-page .teacher__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+
+.student-page .teacher__content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+.student-page .teacher__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+
+.student-page .teacher__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+
+.student-page .teacher__name {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.student-page .teacher__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+
+.student-page .teacher-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #EEF1F8;
+}
+
+
+.student-page .teacher-tag--blue {
+    background: #E8EEFF;
+    color: #2F54EB;
+}
+
+
+.student-page .teacher-tag--blue-light {
+    background: #EAF3FF;
+    color: #1D7EEB;
+}
+
+
+.student-page .teacher-tag--green {
+    background: #E8F8F0;
+    color: #1AA552;
+}
+
+
+.student-page .teacher-tag--orange {
+    background: #FFF1E5;
+    color: #FF831D;
+}
+
+
+.student-page .teacher-tag--yellow {
+    background: #FFF7D6;
+    color: #D49C06;
+}
+
+
+.student-page .teacher-tag--purple {
+    background: #F2EBFF;
+    color: #7B61FF;
+}
+
+
+.student-page .teacher__stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    font-size: 12px;
+}
+
+
+.student-page .teacher__stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+
+.student-page .teacher__stat-icon {
+    font-size: 12px;
+}
+
+
+.student-page .teacher__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.student-page .teacher-label {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #FFF5D8;
+    color: #D49C06;
+}
+
+
+.student-page .teacher__materials {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-gray);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+/* Очень широкие экраны (1600px+) */
+@media (min-width: 1600px) {
+
+.student-page .choice__cards {
+    gap: 16px;
+  }
+  
+
+.student-page .choice__card {
+    background-size: 50% auto;
+    
+  }
+  
+
+.student-page .choice__card-text {
+    font-size: 18px;
+  }
+  
+
+.student-page .material-card__title {
+    font-size: 18px;
+  }
+  
+
+.student-page .compilation__card-title {
+    font-size: 18px;
+  }
+}
+
+/* Большие планшеты и маленькие ноутбуки (1201px - 1400px) */
+@media (max-width: 1400px) {
+
+.student-page .content {
+    padding: 28px 28px 36px 28px;
+  }
+  
+
+.student-page .choice__cards {
+    gap: 10px;
+  }
+  
+
+.student-page .material-card {
+    max-width: 260px;
+  }
+
+
+.student-page .choice__card-text {
+    font-size: 12px;
+  }
+  
+
+.student-page .material-card__title {
+    font-size: 12px;
+  }
+  
+
+.student-page .compilation__card-title {
+    font-size: 12px;
+  }
+  
+}
+
+/* Ноутбуки и большие планшеты (1025px - 1200px) */
+@media (max-width: 1200px) {
+
+.student-page .main {
+    grid-template-columns: 1fr;
+  }
+  
+
+.student-page .choice__cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  
+
+.student-page .choice {
+    min-height: 400px;
+  }
+  
+
+.student-page .choice__card {
+    background-size: 45% auto;
+  }
+  
+
+.student-page .choice__card-text {
+    font-size: 16px;
+  }
+  
+
+.student-page .compilation__three-cards {
+    flex-direction: column;
+  }
+  
+
+.student-page .material-card {
+    max-width: 280px;
+    height: 240px;
+  }
+  
+
+.student-page .content {
+    padding: 24px 24px 32px 24px;
+  }
+  
+
+.student-page .header {
+    gap: 24px;
+  }
+  
+
+.student-page .editable-section__cards {
+    gap: 14px;
+  }
+}
+
+/* Планшеты (769px - 1024px) */
+@media (max-width: 1024px) {
+
+.student-page .container {
+    flex-direction: column;
+  }
+  
+
+.student-page .sidebar--left {
+    max-width: 100%;
+    height: auto;
+    position: static;
+    padding: 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+
+.student-page .sidebar-nav {
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    gap: 24px;
+  }
+  
+
+.student-page .sidebar-nav__header {
+    padding: 0;
+  }
+  
+
+.student-page .sidebar-nav__menu-container {
+    margin-top: 0;
+    flex-grow: 1;
+    max-width: 300px;
+  }
+  
+
+.student-page .sidebar-nav__promo {
+    display: none;
+  }
+  
+
+.student-page .sidebar-nav__link--help {
+    margin-top: 0;
+  }
+  
+
+.student-page .choice__cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+
+.student-page .choice {
+    min-height: 480px;
+  }
+  
+
+.student-page .choice__card {
+    padding: 10px 40px 22px 12px;
+    
+    background-size: 45% auto; /* 45% на планшетах */
+  }
+  
+
+.student-page .choice__card-text {
+    font-size: 16px;
+    max-width: 70%;
+  }
+  
+
+.student-page .material-card {
+    max-width: 280px;
+    height: 230px;
+  }
+  
+
+.student-page .header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+
+.student-page .search__field {
+    padding: 10px 16px 10px 42px;
+  }
+  
+
+.student-page .content {
+    padding: 20px 16px;
+  }
+  
+  .editable-section__inner,
+  .compilation,
+  .stats-card,
+  .promo-card,
+
+.student-page .teachers-card {
+    gap: 16px;
+  }
+  
+
+.student-page .streak-number {
+    font-size: 48px;
+  }
+  
+
+.student-page .editable-section__nav {
+    display: flex;
+  }
+  
+
+.student-page .editable-section__cards {
+    
+    padding-bottom: 16px;
+  }
+  
+
+.student-page .compilation__card {
+    min-height: 180px;
+  }
+  
+
+.student-page .teacher__stats {
+    flex-direction: row;
+    gap: 16px;
+  }
+}
+
+/* Мобильные устройства (481px - 768px) */
+@media (max-width: 768px) {
+
+.student-page .main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+
+.student-page .sidebar--left {
+    padding: 12px;
+    flex-direction: column;
+  }
+  
+
+.student-page .sidebar-nav {
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+  }
+  
+
+.student-page .sidebar-nav__menu-container {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+
+.student-page .sidebar-nav__menu {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  
+
+.student-page .sidebar-nav__item {
+    flex: 1;
+    justify-content: center;
+  }
+  
+
+.student-page .sidebar-nav__link {
+    flex-direction: column;
+    padding: 8px 12px;
+    text-align: center;
+    gap: 6px;
+    font-size: 14px;
+  }
+  
+
+.student-page .sidebar-nav__slider {
+    display: none;
+  }
+  
+
+.student-page .choice {
+    padding: 20px 16px;
+    min-height: 520px;
+  }
+  
+
+.student-page .choice__cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  
+
+.student-page .choice__card {
+    padding: 8px 36px 20px 10px;
+    background-size: 40% auto; /* 40% на мобильных 768px */
+    
+  }
+  
+
+.student-page .choice__card-text {
+    font-size: 15px;
+    max-width: 75%;
+    line-height: 1.25;
+  }
+  
+
+.student-page .material-card {
+    height: auto;
+    min-height: 200px;
+  }
+  
+
+.student-page .editable-section__header {
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .editable-section__title,
+  .compilation__title,
+  .stats-card__title,
+  .promo-card__title,
+  .teachers-card__title,
+
+.student-page .choice__title {
+    font-size: 16px;
+  }
+  
+
+.student-page .compilation__three-cards {
+    gap: 12px;
+  }
+  
+
+.student-page .compilation__card {
+    min-height: 160px;
+  }
+  
+
+.student-page .compilation__card-title {
+    font-size: 16px;
+  }
+  
+
+.student-page .compilation__card-text {
+    font-size: 14px;
+  }
+  
+  .stats-card,
+
+.student-page .promo-card {
+    padding: 20px;
+  }
+  
+
+.student-page .streak-number {
+    font-size: 36px;
+  }
+  
+  .streak-button,
+
+.student-page .promo-card__button {
+    padding: 10px 24px;
+    font-size: 14px;
+  }
+  
+
+.student-page .teacher {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+
+.student-page .teacher__avatar {
+    width: 48px;
+    height: 48px;
+    justify-self: center;
+  }
+  
+
+.student-page .teacher__top {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+
+.student-page .teacher__stats {
+    flex-direction: row;
+    gap: 16px;
+    align-self: flex-start;
+  }
+  
+
+.student-page .progress-text {
+    font-size: 15px;
+  }
+  
+
+.student-page .material-card__progress-label {
+    font-size: 11px;
+  }
+}
+
+/* Маленькие мобильные (до 480px) */
+@media (max-width: 480px) {
+
+.student-page .content {
+    padding: 16px 12px;
+  }
+  
+
+.student-page .header__right {
+    gap: 12px;
+  }
+  
+
+.student-page .user {
+    padding: 6px 12px;
+  }
+  
+
+.student-page .user__name {
+    font-size: 14px;
+  }
+  
+
+.student-page .notification {
+    padding: 10px;
+  }
+  
+
+.student-page .choice__cards {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+
+.student-page .choice {
+    min-height: auto;
+    padding: 16px;
+  }
+  
+
+.student-page .choice__card {
+    aspect-ratio: 169 / 70;
+    padding: 10px 44px 20px 12px;
+    background-size: 35% auto; /* 35% на очень маленьких экранах */
+    
+  }
+  
+
+.student-page .choice__card-text {
+    font-size: 16px;
+    max-width: 80%;
+  }
+  
+
+.student-page .choice__line {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  
+
+.student-page .choice__all {
+    align-self: flex-end;
+  }
+  
+
+@media (hover: none) {
+    .choice__card:hover,
+    .material-card:hover,
+
+.student-page .compilation__card:hover {
+      transform: none;
+      box-shadow: var(--shadow-card);
+    }
+  }
+  
+
+.student-page .editable-section__cards {
+    gap: 8px;
+  }
+  
+
+.student-page .compilation__card {
+    padding: 12px;
+    min-height: 150px;
+  }
+  
+
+.student-page .compilation__card-img {
+    width: 48px;
+    height: 48px;
+  }
+  
+
+.student-page .compilation__card-title {
+    font-size: 15px;
+  }
+  
+
+.student-page .compilation__card-text {
+    font-size: 13px;
+  }
+  
+  .stats-card,
+  .promo-card,
+
+.student-page .teachers-card {
+    padding: 16px;
+  }
+  
+
+.student-page .streak-number {
+    font-size: 32px;
+  }
+  
+
+.student-page .streak-text {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  
+
+.student-page .teacher__tags {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  
+
+.student-page .teacher-tag {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+  
+
+.student-page .material-card__title {
+    font-size: 15px;
+  }
+  
+
+.student-page .material-card__path {
+    font-size: 11px;
+  }
+}
+
+/* Ландшафтная ориентация на мобильных */
+@media (max-height: 600px) and (orientation: landscape) {
+
+.student-page .sidebar--left {
+    padding: 8px 16px;
+    height: auto;
+  }
+  
+
+.student-page .sidebar-nav {
+    flex-direction: row;
+  }
+  
+
+.student-page .material-card {
+    height: 180px;
+  }
+  
+
+.student-page .editable-section__card {
+    height: 180px;
+  }
+  
+
+.student-page .choice__card {
+    height: 60px;
+    padding: 6px 30px 16px 8px;
+  }
+  
+
+.student-page .choice__card-text {
+    font-size: 14px;
+  }
+}
+
+/* Очень высокие экраны */
+@media (min-height: 1200px) {
+
+.student-page .sidebar--left {
+    height: 100vh;
+    position: sticky;
+    top: 0;
+  }
+  
+
+.student-page .material-card {
+    height: 280px;
+  }
+  
+
+.student-page .editable-section__card {
+    height: 280px;
+  }
+  
+
+.student-page .choice__card {
+    padding: 14px 52px 28px 14px;
+  }
+  
+
+.student-page .choice__card-text {
+    font-size: 18px;
+  }
+}
+
+/* Очень узкие экраны (менее 360px) */
+@media (max-width: 360px) {
+
+.student-page .choice__card-text {
+    font-size: 15px;
+    max-width: 85%;
+  }
+  
+
+.student-page .choice__card {
+    background-size: 32% auto; /* Еще меньше на очень узких экранах */
+  }
+  
+
+.student-page .material-card__title {
+    font-size: 14px;
+  }
+  
+
+.student-page .progress-text {
+    font-size: 14px;
+  }
+  
+
+.student-page .teacher__name {
+    font-size: 13px;
+  }
+  
+
+.student-page .compilation__card-title {
+    font-size: 14px;
+  }
+}

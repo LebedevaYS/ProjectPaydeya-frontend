@@ -1,31 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { PublicHeader } from "../../../../widgets/public-header";
 
 export function ChoiceRolePage() {
   const [hovered, setHovered] = useState(null);
 
   return (
     <div className="choice-role-page">
-      <header className="header">
-        
-        <Link to="/" className="logo">
-                <img
-                  src="/img/svg/logo.svg"
-                  alt="Paideia"
-                  className="header__logo-pic"
-                />
-        </Link>
-
-        <div className="header-buttons">
-          <Link to="/registration" className="btn-register">
-            Регистрация
-          </Link>
-          <Link to="/login" className="btn-login">
-            Вход
-          </Link>
-        </div>
-      </header>
-
+      <PublicHeader />
       <main className="choice-role-main">
         <div className="role-container">
           <div className="role-title">Регистрация</div>

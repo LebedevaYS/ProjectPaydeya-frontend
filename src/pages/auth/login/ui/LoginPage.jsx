@@ -137,7 +137,6 @@ export function LoginPage() {
   return (
     <>
       <PublicHeader />
-
       <div className="main-container">
         <div className="auth-section">
           <div className="auth-title">Авторизация</div>
@@ -219,7 +218,7 @@ export function LoginPage() {
               </button>
 
               <div className="register-link">
-                Ещё нет аккаунта? <Link to="/registration">Зарегистрироваться</Link>
+                Ещё нет аккаунта? <Link to="/choice-role">Зарегистрироваться</Link>
               </div>
             </div>
           </form>

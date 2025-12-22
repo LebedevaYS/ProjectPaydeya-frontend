@@ -4,12 +4,13 @@ export function PublicHomePage() {
   const ROUTES = {
     login: "/login",
     registration: "/registration",
-    choiceRole: "/registration/choice-role",
+    choiceRole: "/choice-role",
     teacher: "/teacher",
+    student: "/student",
   };
 
   return (
-    <>
+    <div className="home-page">
       <style>{`
         *, *::before, *::after { box-sizing: border-box; }
         html, body { margin: 0; padding: 0; }
@@ -30,19 +31,21 @@ export function PublicHomePage() {
               </Link>
             </div>
 
-            <nav className="header__nav"> 
+            <nav className="header__nav">
               <div className="header__nav-card">
                 <ul className="header__list">
                   <li className="header__item">
-                    <a href="#students" className="header__link">
+                    <Link to={ROUTES.student} className="header__link">
                       Ученикам
-                    </a>
+                    </Link>
                   </li>
+
                   <li className="header__item">
-                    <a href="#teachers" className="header__link">
+                    <Link to={ROUTES.teacher} className="header__link">
                       Преподавателям
-                    </a>
+                    </Link>
                   </li>
+
                   <li className="header__item">
                     <a href="#about" className="header__link">
                       О платформе
@@ -54,7 +57,7 @@ export function PublicHomePage() {
 
             <div className="header__buttons">
               <Link
-                to="/registration/choose-role"
+                to="/choice-role"
                 className="header__button header__button--register"
               >
                 Регистрация
@@ -119,10 +122,7 @@ export function PublicHomePage() {
                 </div>
               </Link>
 
-              <a
-                href="#students"
-                className="intro__feature intro__feature--students"
-              >
+              <Link to={ROUTES.student} className="intro__feature intro__feature--students">
                 <div className="intro__feature-content">
                   <h3 className="intro__feature-title">Ученикам</h3>
                   <p className="intro__feature-text intro__feature-text--gray">
@@ -136,7 +136,7 @@ export function PublicHomePage() {
                     className="intro__feature-icon"
                   />
                 </div>
-              </a>
+              </Link>
             </div>
           </section>
 
@@ -444,6 +444,6 @@ export function PublicHomePage() {
           </div>
         </footer>
       </div>
-    </>
+    </div>
   );
 }

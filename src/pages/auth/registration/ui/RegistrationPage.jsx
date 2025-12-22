@@ -1,6 +1,7 @@
 // RegistrationPage.jsx
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
+import { PublicHeader } from "../../../../widgets/public-header";
 import { WelcomeBlock } from "../../../../widgets/welcome-block";
 import { FloatingInput } from "../../../../shared/ui/FloatingInput/FloatingInput";
 import { PasswordInput } from "../../../../shared/ui/PasswordInput/PasswordInput";
@@ -146,17 +147,7 @@ export function RegistrationPage() {
 
   return (
     <>
-      <header className="header">
-        <div className="logo">
-          <img src="/img/svg/logo.svg" alt="Logo" />
-        </div>
-
-        <div className="header-buttons">
-          <Link to="/choice-role" className="btn-register">Регистрация</Link>
-          <Link to="/login" className="btn-login">Вход</Link>
-        </div>
-      </header>
-
+      <PublicHeader />
       <div className="main-container">
         <div className="registration-section">
           <div className="registration-title">
