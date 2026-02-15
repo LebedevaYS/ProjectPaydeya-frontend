@@ -7,25 +7,49 @@ export function ChoiceRolePage() {
   const [hovered, setHovered] = useState(null);
 
   return (
-    <>
+    <div className="choice-role-page">
       <PublicHeader />
+      <main className="choice-role-main">
+        <div className="role-container">
+          <div className="role-title">Регистрация</div>
 
-      <div className="role-container">
-        <div className="role-title">Регистрация</div>
+          <div className="roles-grid">
+            <div className="role-card teacher-card">
+              <div className="role-name">Я преподаватель</div>
+              <div className="role-description">
+                Хочу создавать материалы и <br />
+                искать учеников
+              </div>
 
-        <div className="roles-grid">
-          <div className="role-card teacher-card">
-            <div className="role-name">Я преподаватель</div>
-            <div className="role-description">
-              Хочу создавать материалы и <br />искать учеников
+              <img
+                src="/img/svg/teacher.svg"
+                alt="Преподаватель"
+                className="role-icon"
+                style={{
+                  animation:
+                    hovered === "teacher"
+                      ? "floatHover 1.5s ease-in-out infinite"
+                      : "none",
+                }}
+              />
+
+              <Link
+                to="/registration?role=teacher"
+                className="role-button teacher-btn"
+                onMouseEnter={() => setHovered("teacher")}
+                onMouseLeave={() => setHovered(null)}
+              >
+                Продолжить как преподаватель
+                <img src="/img/svg/arrow-up-right.svg" alt="" className="btn-arrow" />
+              </Link>
             </div>
 
-            <img
-              src="/img/svg/teacher.svg"
-              alt="Преподаватель"
-              className="role-icon"
-              style={{ animation: hovered === "teacher" ? "floatHover 1.5s ease-in-out infinite" : "none" }}
-            />
+            <div className="role-card student-card">
+              <div className="role-name">Я Студент</div>
+              <div className="role-description">
+                Хочу учиться на платформе <br />
+                и искать преподавателя
+              </div>
 
             {/* Добавляем параметр role=teacher в URL */}
             <Link
@@ -39,10 +63,15 @@ export function ChoiceRolePage() {
             </Link>
           </div>
 
-          <div className="role-card student-card">
-            <div className="role-name">Я Студент</div>
-            <div className="role-description">
-              Хочу учиться на платформе <br />и искать преподавателя
+              <Link
+                to="/registration?role=student"
+                className="role-button student-btn"
+                onMouseEnter={() => setHovered("student")}
+                onMouseLeave={() => setHovered(null)}
+              >
+                Продолжить как студент
+                <img src="/img/svg/arrow-up-right.svg" alt="" className="btn-arrow" />
+              </Link>
             </div>
 
             <img
@@ -64,7 +93,7 @@ export function ChoiceRolePage() {
             </Link>
           </div>
         </div>
-      </div>
-    </>
+      </main>
+    </div>
   );
 }

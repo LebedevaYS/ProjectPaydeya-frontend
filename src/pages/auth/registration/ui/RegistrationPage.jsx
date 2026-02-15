@@ -148,7 +148,6 @@ export function RegistrationPage() {
   return (
     <>
       <PublicHeader />
-
       <div className="main-container">
         <div className="registration-section">
           <div className="registration-title">

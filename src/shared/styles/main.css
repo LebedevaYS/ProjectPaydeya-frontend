@@ -33,12 +33,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: rotate(-0.68deg);
-    transition: transform 0.5s ease;
-}
-
-.logo:hover {
-    transform: rotate(360deg);
 }
 
 .header-buttons {

@@ -131,6 +131,6 @@ export function TeacherMainPage() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

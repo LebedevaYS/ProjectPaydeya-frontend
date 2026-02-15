@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paideia</title>
+
+
+
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -33,13 +38,13 @@
             </nav>
 
             <div class="header__buttons">
-                <a href="../static-pages/choice_reg.html" class="header__button header__button--register">Регистрация</a>
-                <a href="../static-pages/Login.html" class="header__button header__button--login">Вход</a>
+                <a href="./static-pages/choice_reg.html" class="header__button header__button--register btn btn--surface">Регистрация</a>
+                <a href="./static-pages/Login.html" class="header__button header__button--login btn btn--primary">Вход</a>
             </div>
         </div>
     </header>
 
-    <div class="main">
+    <main class="main">
         <section class="intro">
             <span class="intro__comm">
                 Интерактивное пространство знаний
@@ -142,7 +147,7 @@
                         <span class="students__card-part students__card-part--light">Зарегистрируйтесь, чтобы иметь доступ ко всем материалам</span>
                     </h3>
                     <p class="students__card-text students__card-text--light">Чтобы иметь доступ, необходимо зарегистрироваться</p>
-                    <a href="../static-pages/Reg.html" class="students__card-button">
+                    <a href="./static-pages/Reg.html" class="students__card-button">
                         <span class="students__button-text">Зарегистрироваться как ученик</span>
                         <img src="./img/svg/arrow-up-right.svg" alt="Стрелка" class="students__button-icon">
                     </a>
@@ -226,7 +231,7 @@
 
             <div class="teachers__grid">
                 <!-- Карточка 1 (широкая левая) -->
-                <div class="teachers__card teachers__card--wide">
+                <div class="teachers__card teachers__card--wide teachers__card--bg-1">
                     <h3 class="teachers__card-title">
                         <span class="teachers__card-part teachers__card-part--primary">Привлекайте новых</span>
                         <span class="teachers__card-part teachers__card-part--accent-blue">учеников</span>
@@ -235,7 +240,7 @@
                 </div>
 
                 <!-- Карточка 2 (узкая правая) -->
-                <div class="teachers__card teachers__card--narrow">
+                <div class="teachers__card teachers__card--narrow teachers__card--bg-2">
                     <h3 class="teachers__card-title">
                         <span class="teachers__card-part teachers__card-part--primary">Создавайте</span>
                         <span class="teachers__card-part teachers__card-part--accent-blue">интерактивные</span>
@@ -245,7 +250,7 @@
                 </div>
 
                 <!-- Карточка 3 (узкая левая) -->
-                <div class="teachers__card teachers__card--narrow">
+                <div class="teachers__card teachers__card--narrow teachers__card--bg-3">
                     <h3 class="teachers__card-title">
                         <span class="teachers__card-part teachers__card-part--primary">Сделайте уроки</span>
                         <span class="teachers__card-part teachers__card-part--accent-dark">увлекательными</span>
@@ -254,10 +259,10 @@
                 </div>
 
                 <!-- Карточка 4 (широкая правая) -->
-                <div class="teachers__card teachers__card--wide">
+                <div class="teachers__card teachers__card--wide teachers__card--bg-4">
                     <h3 class="teachers__card-title teachers__card-title--light">Зарегистрируйтесь, чтобы иметь доступ</h3>
                     <p class="teachers__card-text teachers__card-text--light">Начните работу на платформе после регистрации</p>
-                    <a href="../static-pages/Reg.html" class="teachers__card-button">
+                    <a href="./static-pages/Reg.html" class="teachers__card-button">
                         <span class="teachers__button-text">Зарегистрироваться как преподаватель</span>
                         <img src="./img/svg/arrow-up-right.svg" alt="Стрелка" class="teachers__button-icon">
                     </a>
@@ -265,8 +270,7 @@
             </div>
 
         </section>
-
-    </div>
+    </main>
 
     <footer class="footer">
         <div class="footer__container">

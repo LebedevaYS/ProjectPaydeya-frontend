@@ -3,3 +3,27 @@
 @import "../../shared/styles/login.css";
 @import "../../shared/styles/reg.css";
 @import "../../shared/styles/choice_reg.css";
+@import "../../shared/styles/common.css";
+@import "../../shared/styles/components.css";
+
+/* .public-home main {
+  display: block;
+  align-items: stretch;
+} */
+
+/* Глобальные стили приложения
+/* ВАЖНО: style.css сюда НЕ импортируем */
+
+/* @import "../../shared/styles/common.css";
+@import "../../shared/styles/components.css";
+
+/* базовый сброс 
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+} */ 

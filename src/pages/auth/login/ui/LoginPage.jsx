@@ -151,7 +151,6 @@ export function LoginPage() {
   return (
     <>
       <PublicHeader />
-
       <div className="main-container">
         <div className="auth-section">
           <div className="auth-title">Авторизация</div>

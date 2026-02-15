@@ -4,110 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Падейя - Личный кабинет преподавателя</title>
-    <link rel="stylesheet" href="css/main_teacher.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
-</head>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const slider = document.querySelector('.sidebar-nav__slider');
-    const links = document.querySelectorAll('.sidebar-nav__link');
-    const activeLink = document.querySelector('.sidebar-nav__link--active');
-    const menuContainer = document.querySelector('.sidebar-nav__menu-container');
-    
-    function calculateItemHeight() {
-        const firstItem = document.querySelector('.sidebar-nav__item');
-        const itemRect = firstItem.getBoundingClientRect();
-        return itemRect.height;
-    }
-    
-    const itemHeight = calculateItemHeight();
-    const activeIndex = parseInt(activeLink.getAttribute('data-index'));
-    slider.style.top = (activeIndex * itemHeight) + 'px';
-    slider.style.height = itemHeight + 'px';
-    
-    links.forEach(link => {
-        link.addEventListener('mouseenter', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            const newPosition = index * itemHeight;
-            slider.style.top = newPosition + 'px';
-            
-            if (index !== activeIndex) {
-                activeLink.classList.remove('sidebar-nav__link--active');
-            }
-        });
-        
-        link.addEventListener('mouseleave', function() {
-            const currentActiveIndex = parseInt(activeLink.getAttribute('data-index'));
-            const activePosition = currentActiveIndex * itemHeight;
-            slider.style.top = activePosition + 'px';
-            
-            activeLink.classList.add('sidebar-nav__link--active');
-        });
-    });
-    
-    window.addEventListener('resize', function() {
-        const newHeight = calculateItemHeight();
-        slider.style.height = newHeight + 'px';
-        
-        const currentIndex = parseInt(activeLink.getAttribute('data-index'));
-        slider.style.top = (currentIndex * newHeight) + 'px';
-    });
-});
 
-document.addEventListener('DOMContentLoaded', function() {
-    const dropdownToggles = document.querySelectorAll('.dropdown__toggle');
-    const dropdownMenus = document.querySelectorAll('.dropdown__menu');
-    
-    // Обработка клика по кнопке dropdown
-    dropdownToggles.forEach(toggle => {
-        toggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const dropdown = this.parentElement;
-            const menu = dropdown.querySelector('.dropdown__menu');
-            
-            // Закрываем все остальные dropdown
-            dropdownMenus.forEach(otherMenu => {
-                if (otherMenu !== menu) {
-                    otherMenu.classList.remove('dropdown__menu--active');
-                    otherMenu.closest('.dropdown').querySelector('.dropdown__toggle').classList.remove('dropdown__toggle--active');
-                }
-            });
-            
-            // Переключаем текущий dropdown
-            menu.classList.toggle('dropdown__menu--active');
-            this.classList.toggle('dropdown__toggle--active');
-        });
-    });
-    
-    // Обработка выбора в фильтрах
-    const dropdownItems = document.querySelectorAll('.dropdown__item input');
-    dropdownItems.forEach(item => {
-        item.addEventListener('change', function() {
-            console.log(`Фильтр изменен: ${this.name} = ${this.value} (${this.checked})`);
-            // Здесь будет логика фильтрации карточек
-        });
-    });
-    
-    // Закрытие dropdown при клике вне его
-    document.addEventListener('click', function() {
-        dropdownMenus.forEach(menu => {
-            menu.classList.remove('dropdown__menu--active');
-        });
-        dropdownToggles.forEach(toggle => {
-            toggle.classList.remove('dropdown__toggle--active');
-        });
-    });
-    
-    // Предотвращаем закрытие при клике внутри меню
-    dropdownMenus.forEach(menu => {
-        menu.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-    });
-});
-</script>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/main_teacher.css">
+</head>
+
 
 <body>
     <div class="container">
@@ -587,5 +494,105 @@ document.addEventListener('DOMContentLoaded', function() {
 
         </main>
     </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const slider = document.querySelector('.sidebar-nav__slider');
+    const links = document.querySelectorAll('.sidebar-nav__link');
+    const activeLink = document.querySelector('.sidebar-nav__link--active');
+    const menuContainer = document.querySelector('.sidebar-nav__menu-container');
+    
+    function calculateItemHeight() {
+        const firstItem = document.querySelector('.sidebar-nav__item');
+        const itemRect = firstItem.getBoundingClientRect();
+        return itemRect.height;
+    }
+    
+    const itemHeight = calculateItemHeight();
+    const activeIndex = parseInt(activeLink.getAttribute('data-index'));
+    slider.style.top = (activeIndex * itemHeight) + 'px';
+    slider.style.height = itemHeight + 'px';
+    
+    links.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            const newPosition = index * itemHeight;
+            slider.style.top = newPosition + 'px';
+            
+            if (index !== activeIndex) {
+                activeLink.classList.remove('sidebar-nav__link--active');
+            }
+        });
+        
+        link.addEventListener('mouseleave', function() {
+            const currentActiveIndex = parseInt(activeLink.getAttribute('data-index'));
+            const activePosition = currentActiveIndex * itemHeight;
+            slider.style.top = activePosition + 'px';
+            
+            activeLink.classList.add('sidebar-nav__link--active');
+        });
+    });
+    
+    window.addEventListener('resize', function() {
+        const newHeight = calculateItemHeight();
+        slider.style.height = newHeight + 'px';
+        
+        const currentIndex = parseInt(activeLink.getAttribute('data-index'));
+        slider.style.top = (currentIndex * newHeight) + 'px';
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdownToggles = document.querySelectorAll('.dropdown__toggle');
+    const dropdownMenus = document.querySelectorAll('.dropdown__menu');
+    
+    // Обработка клика по кнопке dropdown
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = this.parentElement;
+            const menu = dropdown.querySelector('.dropdown__menu');
+            
+            // Закрываем все остальные dropdown
+            dropdownMenus.forEach(otherMenu => {
+                if (otherMenu !== menu) {
+                    otherMenu.classList.remove('dropdown__menu--active');
+                    otherMenu.closest('.dropdown').querySelector('.dropdown__toggle').classList.remove('dropdown__toggle--active');
+                }
+            });
+            
+            // Переключаем текущий dropdown
+            menu.classList.toggle('dropdown__menu--active');
+            this.classList.toggle('dropdown__toggle--active');
+        });
+    });
+    
+    // Обработка выбора в фильтрах
+    const dropdownItems = document.querySelectorAll('.dropdown__item input');
+    dropdownItems.forEach(item => {
+        item.addEventListener('change', function() {
+            console.log(`Фильтр изменен: ${this.name} = ${this.value} (${this.checked})`);
+            // Здесь будет логика фильтрации карточек
+        });
+    });
+    
+    // Закрытие dropdown при клике вне его
+    document.addEventListener('click', function() {
+        dropdownMenus.forEach(menu => {
+            menu.classList.remove('dropdown__menu--active');
+        });
+        dropdownToggles.forEach(toggle => {
+            toggle.classList.remove('dropdown__toggle--active');
+        });
+    });
+    
+    // Предотвращаем закрытие при клике внутри меню
+    dropdownMenus.forEach(menu => {
+        menu.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    });
+});
+</script>
+
 </body>
 </html>
