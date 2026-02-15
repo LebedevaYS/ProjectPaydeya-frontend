@@ -1,3 +1,4 @@
+// ChoiceRolePage.jsx
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { PublicHeader } from "../../../../widgets/public-header";
@@ -50,17 +51,17 @@ export function ChoiceRolePage() {
                 и искать преподавателя
               </div>
 
-              <img
-                src="/img/svg/student.svg"
-                alt="Ученик"
-                className="role-icon"
-                style={{
-                  animation:
-                    hovered === "student"
-                      ? "floatHover 1.5s ease-in-out infinite"
-                      : "none",
-                }}
-              />
+            {/* Добавляем параметр role=teacher в URL */}
+            <Link
+              to="/registration?role=teacher"
+              className="role-button teacher-btn"
+              onMouseEnter={() => setHovered("teacher")}
+              onMouseLeave={() => setHovered(null)}
+            >
+              Продолжить как преподаватель
+              <img src="/img/svg/arrow-up-right.svg" alt="" className="btn-arrow" />
+            </Link>
+          </div>
 
               <Link
                 to="/registration?role=student"
@@ -72,6 +73,24 @@ export function ChoiceRolePage() {
                 <img src="/img/svg/arrow-up-right.svg" alt="" className="btn-arrow" />
               </Link>
             </div>
+
+            <img
+              src="/img/svg/student.svg"
+              alt="Ученик"
+              className="role-icon"
+              style={{ animation: hovered === "student" ? "floatHover 1.5s ease-in-out infinite" : "none" }}
+            />
+
+            {/* Добавляем параметр role=student в URL */}
+            <Link
+              to="/registration?role=student"
+              className="role-button student-btn"
+              onMouseEnter={() => setHovered("student")}
+              onMouseLeave={() => setHovered(null)}
+            >
+              Продолжить как студент
+              <img src="/img/svg/arrow-up-right.svg" alt="" className="btn-arrow" />
+            </Link>
           </div>
         </div>
       </main>

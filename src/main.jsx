@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { App } from "./app/index.jsx";
+//import { App } from "./app/index.jsx";
+import App from './App.jsx'
+import './index.css'
 import "./app/styles/global.css";
 
 import "./shared/styles/common.css";

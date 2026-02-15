@@ -1,3 +1,4 @@
+// src/utils/translations.js
 export const translateError = (error) => {
   if (!error || typeof error !== 'string') {
     return "Неизвестная ошибка";

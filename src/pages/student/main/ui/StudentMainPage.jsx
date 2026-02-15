@@ -1,1031 +1,486 @@
-import { useEffect } from "react";
-import "../../../../shared/styles/dashboard.css";
-import "../../../../shared/styles/main_student.css";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { PublicHeader } from '../../../../widgets/public-header';
 
 export function StudentMainPage() {
-  // Слайдер подсветки в боковом меню
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [materials, setMaterials] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  // Замените на ваш URL бэкенда
+  const API_BASE_URL = 'https://paydeya-backend.onrender.com/api/v1';
+  // Для разработки: 'http://localhost:8080/api/v1'
+
   useEffect(() => {
-    const slider = document.querySelector(".sidebar-nav__slider");
-    const links = document.querySelectorAll(".sidebar-nav__link[data-index]");
-    const activeLink = document.querySelector(".sidebar-nav__link--active");
+    // Проверка авторизации
+    const token = localStorage.getItem('accessToken');
+    const userData = localStorage.getItem('user');
 
-    if (!slider || !activeLink || !links.length) return;
+    if (!token || !userData) {
+      navigate('/login');
+      return;
+    }
 
-    const calculateItemHeight = () => {
-      const firstItem = document.querySelector(".sidebar-nav__item");
-      return firstItem ? firstItem.getBoundingClientRect().height : 0;
-    };
+    try {
+      const parsedUser = JSON.parse(userData);
+      setUser(parsedUser);
 
-    let itemHeight = calculateItemHeight();
-    const activeIndex = parseInt(activeLink.getAttribute("data-index") || "0", 10);
-
-    const setSliderToIndex = (index) => {
-      slider.style.top = `${index * itemHeight}px`;
-      slider.style.height = `${itemHeight}px`;
-    };
-
-    setSliderToIndex(activeIndex);
-
-    const onEnter = function () {
-      const index = parseInt(this.getAttribute("data-index") || "0", 10);
-      setSliderToIndex(index);
-
-      if (index !== activeIndex) {
-        activeLink.classList.remove("sidebar-nav__link--active");
+      // Проверка роли студента
+      if (parsedUser.role !== 'student') {
+        navigate('/');
+        return;
       }
-    };
 
-    const onLeave = function () {
-      const currentActiveIndex = parseInt(activeLink.getAttribute("data-index") || "0", 10);
-      setSliderToIndex(currentActiveIndex);
-      activeLink.classList.add("sidebar-nav__link--active");
-    };
+      // Загружаем материалы
+      loadMaterials(token);
+    } catch (error) {
+      console.error('Error parsing user data:', error);
+      navigate('/login');
+    }
+  }, [navigate]);
 
-    links.forEach((link) => {
-      link.addEventListener("mouseenter", onEnter);
-      link.addEventListener("mouseleave", onLeave);
-    });
-
-    const onResize = () => {
-      itemHeight = calculateItemHeight();
-      const currentIndex = parseInt(activeLink.getAttribute("data-index") || "0", 10);
-      setSliderToIndex(currentIndex);
-    };
-
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      links.forEach((link) => {
-        link.removeEventListener("mouseenter", onEnter);
-        link.removeEventListener("mouseleave", onLeave);
+  const loadMaterials = async (token) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/catalog/materials`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
       });
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
 
-  // Скролл “Продолжить обучение”
-  useEffect(() => {
-    const container = document.querySelector(".editable-section__cards-container");
-    const prevButton = document.querySelector(".editable-section__nav-button--prev");
-    const nextButton = document.querySelector(".editable-section__nav-button--next");
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-    if (!container || !prevButton || !nextButton) return;
+      const data = await response.json();
 
-    const prevIcon = prevButton.querySelector("img");
-    const nextIcon = nextButton.querySelector("img");
-    if (!prevIcon || !nextIcon) return;
+      // Извлекаем материалы из ответа
+      if (data && data.materials && Array.isArray(data.materials)) {
+        setMaterials(data.materials);
+      } else {
+        console.warn('Unexpected API response format:', data);
+        setMaterials([]);
+      }
 
-    const CARD_WIDTH = 233;
-    const GAP = 12;
+    } catch (error) {
+      console.error('Error loading materials:', error);
+      setError('Не удалось загрузить материалы');
+      setMaterials([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const updateControls = () => {
-      const scrollLeft = container.scrollLeft;
-      const scrollWidth = container.scrollWidth;
-      const clientWidth = container.clientWidth;
-
-      const canScrollPrev = scrollLeft > 0;
-      const canScrollNext = scrollLeft + clientWidth < scrollWidth - 10;
-
-      prevIcon.src = canScrollPrev
-        ? "./img/svg/chevron-left-2.svg"
-        : "./img/svg/chevron-left-1.svg";
-      nextIcon.src = canScrollNext
-        ? "./img/svg/chevron-right-2.svg"
-        : "./img/svg/chevron-right-1.svg";
-
-      prevButton.disabled = !canScrollPrev;
-      nextButton.disabled = !canScrollNext;
-    };
-
-    const onPrev = () => container.scrollBy({ left: -(CARD_WIDTH + GAP), behavior: "smooth" });
-    const onNext = () => container.scrollBy({ left: CARD_WIDTH + GAP, behavior: "smooth" });
-
-    prevButton.addEventListener("click", onPrev);
-    nextButton.addEventListener("click", onNext);
-    container.addEventListener("scroll", updateControls);
-    window.addEventListener("resize", updateControls);
-
-    updateControls();
-
-    return () => {
-      prevButton.removeEventListener("click", onPrev);
-      nextButton.removeEventListener("click", onNext);
-      container.removeEventListener("scroll", updateControls);
-      window.removeEventListener("resize", updateControls);
-    };
-  }, []);
-  
-  useEffect(() => {
-      const dropdown = document.querySelector(".student-page .dropdown");
-      if (!dropdown) return;
-
-      const toggle = dropdown.querySelector(".dropdown__toggle");
-      const menu = dropdown.querySelector(".dropdown__menu");
-
-      if (!toggle || !menu) return;
-
-      const onToggleClick = (e) => {
-          e.stopPropagation();
-          toggle.classList.toggle("dropdown__toggle--active");
-          menu.classList.toggle("dropdown__menu--active");
-      };
-
-      const onDocumentClick = (e) => {
-          if (!dropdown.contains(e.target)) {
-              toggle.classList.remove("dropdown__toggle--active");
-              menu.classList.remove("dropdown__menu--active");
-          }
-      };
-
-      toggle.addEventListener("click", onToggleClick);
-      document.addEventListener("click", onDocumentClick);
-
-      return () => {
-          toggle.removeEventListener("click", onToggleClick);
-          document.removeEventListener("click", onDocumentClick);
-      };
-  }, []);
-
-  
+  if (loading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <PublicHeader />
+        <div style={{
+          flex: 1,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+          <div style={{ fontSize: '1.2rem', color: '#666' }}>Загрузка материалов...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="dashboard student-page">
-      <div className="container">
-        {/* Sidebar */}
-        <aside className="sidebar sidebar--left">
-          <nav className="sidebar-nav">
-            <div className="sidebar-nav__header">
-              <img
-                className="sidebar-nav__logo"
-                src="/img/svg/sidebar_logo.svg"
-                alt=""
-              />
-            </div>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <PublicHeader />
 
-            <div className="sidebar-nav__menu-container">
-              <ul className="sidebar-nav__menu">
-                <li className="sidebar-nav__item">
-                  <a
-                    href="#!"
-                    className="sidebar-nav__link sidebar-nav__link--active"
-                    data-index="0"
-                  >
-                    <div className="sidebar-nav__icon-wrapper">
-                      <img
-                        src="/img/svg/home-1.svg"
-                        alt=""
-                        className="sidebar-nav__icon sidebar-nav__icon--default"
-                      />
-                      <img
-                        src="/img/svg/home-2.svg"
-                        alt=""
-                        className="sidebar-nav__icon sidebar-nav__icon--hover"
-                      />
-                    </div>
-                    Главная
-                  </a>
-                </li>
+      <div style={{
+        flex: 1,
+        padding: '40px 20px',
+        backgroundColor: '#f8f9fa'
+      }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto'
+        }}>
+          {/* Приветствие */}
+          <div style={{
+            marginBottom: '50px',
+            textAlign: 'center'
+          }}>
+            <h1 style={{
+              fontSize: '2.5rem',
+              marginBottom: '10px',
+              color: '#333'
+            }}>
+              Добро пожаловать, {user?.fullName || 'Студент'}! 👨‍🎓
+            </h1>
+            <p style={{
+              fontSize: '1.2rem',
+              color: '#666',
+              marginBottom: '30px'
+            }}>
+              Ваша учебная панель
+            </p>
 
-                <li className="sidebar-nav__item">
-                  <a href="#!" className="sidebar-nav__link" data-index="1">
-                    <div className="sidebar-nav__icon-wrapper">
-                      <img
-                        src="/img/svg/profile-1.svg"
-                        alt=""
-                        className="sidebar-nav__icon sidebar-nav__icon--default"
-                      />
-                      <img
-                        src="/img/svg/profile-2.svg"
-                        alt=""
-                        className="sidebar-nav__icon sidebar-nav__icon--hover"
-                      />
-                    </div>
-                    Профиль
-                  </a>
-                </li>
-
-                <li className="sidebar-nav__item">
-                  <a href="#!" className="sidebar-nav__link" data-index="2">
-                    <div className="sidebar-nav__icon-wrapper">
-                      <img
-                        src="/img/svg/my_lessons-1.svg"
-                        alt=""
-                        className="sidebar-nav__icon sidebar-nav__icon--default"
-                      />
-                      <img
-                        src="/img/svg/my_lessons-2.svg"
-                        alt=""
-                        className="sidebar-nav__icon sidebar-nav__icon--hover"
-                      />
-                    </div>
-                    Материалы
-                  </a>
-                </li>
-
-                <li className="sidebar-nav__item">
-                  <a href="#!" className="sidebar-nav__link" data-index="3">
-                    <div className="sidebar-nav__icon-wrapper">
-                      <img
-                        src="/img/svg/teachers-1.svg"
-                        alt=""
-                        className="sidebar-nav__icon sidebar-nav__icon--default"
-                      />
-                      <img
-                        src="/img/svg/teachers-2.svg"
-                        alt=""
-                        className="sidebar-nav__icon sidebar-nav__icon--hover"
-                      />
-                    </div>
-                    Преподаватели
-                  </a>
-                </li>
-              </ul>
-
-              <div className="sidebar-nav__slider" />
-            </div>
-
-            <div className="sidebar-nav__promo">
-              <p className="sidebar-nav__promo-text">
-                Вы ещё не смотрели преподавателей
-              </p>
-              <p className="sidebar-nav__promo-subtext">
-                Возможность найти новые материалы или репетитра
-              </p>
-              <a
-                href="/create-material"
-                className="sidebar-nav__promo-button"
+            {/* Быстрые действия */}
+            <div style={{
+              display: 'flex',
+              gap: '15px',
+              justifyContent: 'center',
+              flexWrap: 'wrap'
+            }}>
+              <button
+                onClick={() => navigate('/catalog')}
+                style={{
+                  padding: '12px 24px',
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontSize: '1rem',
+                  fontWeight: 'bold',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}
               >
-                Перейти
-              </a>
-            </div>
-
-            <a
-              href="#!"
-              className="sidebar-nav__link sidebar-nav__link--help"
-            >
-              <span className="sidebar-nav__help-icon">?</span>
-              Помощь
-            </a>
-          </nav>
-        </aside>
-
-        {/* Content */}
-        <main className="content">
-          <header className="header">
-            <div className="student-page__center">
-              <div className="search">
-                <input
-                  className="search__field"
-                  type="text"
-                  placeholder="Поиск..."
-                />
-              </div>
-            </div>
-
-            <div className="header__right">
-              <button className="notification">
-                <img
-                  className="notification__bell"
-                  src="/img/svg/bell.svg"
-                  alt="Уведомления"
-                />
-                <svg
-                  className="notification-badge"
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                >
-                  <circle
-                    cx="6"
-                    cy="6"
-                    r="4"
-                    fill="#EE215B"
-                    stroke="white"
-                    strokeWidth="2"
-                  />
-                </svg>
+                <span>🔍</span> Поиск материалов
               </button>
 
-              <div className="user">
-                <div className="user__avatar" data-user-id="123">
-                  И
-                </div>
-                <span className="user__name">Имя Фамилия</span>
-                <img src="/img/svg/vec.svg" alt="▼" />
-              </div>
-            </div>
-          </header>
-
-          <div className="main">
-            <div className="student-page__center">
-              <div className="main__left">
-                {/* Choice */}
-                <section className="choice">
-                  <div className="choice__line">
-                    <h2 className="choice__title">Выбор редакции</h2>
-                    <a href="" className="choice__all">
-                      <span className="choice__all-text">Смотреть все</span>
-                      <img src="/img/svg/all.svg" alt="Стрелка" className="choice__all-icon" />
-                    </a>
-                  </div>
-
-                  <div className="choice__cards">
-                    <a href="/math" className="choice__card choice__card--math">
-                      <span className="choice__card-text">Математика</span>
-                    </a>
-                    <a href="/biology" className="choice__card choice__card--biology">
-                      <span className="choice__card-text">Биология</span>
-                    </a>
-                    <a href="/history" className="choice__card choice__card--history">
-                      <span className="choice__card-text">История</span>
-                    </a>
-                    <a href="/social" className="choice__card choice__card--social">
-                      <span className="choice__card-text">Общество&shy;знание</span>
-                    </a>
-                    <a href="/chemistry" className="choice__card choice__card--chemistry">
-                      <span className="choice__card-text">Химия</span>
-                    </a>
-                    <a href="/informatics" className="choice__card choice__card--informatics">
-                      <span className="choice__card-text">Информатика</span>
-                    </a>
-                    <a href="/astronomy" className="choice__card choice__card--astronomy">
-                      <span className="choice__card-text">Астрономия</span>
-                    </a>
-                    <a href="/literature" className="choice__card choice__card--literature">
-                      <span className="choice__card-text">Литература</span>
-                    </a>
-                    <a href="/english" className="choice__card choice__card--english">
-                      <span className="choice__card-text">Английский язык</span>
-                    </a>
-                    <a href="/russian" className="choice__card choice__card--russian">
-                      <span className="choice__card-text">
-                        Русский<br />язык
-                      </span>
-                    </a>
-                    <a href="/geography" className="choice__card choice__card--geography">
-                      <span className="choice__card-text">География</span>
-                    </a>
-                    <a href="/physics" className="choice__card choice__card--physics">
-                      <span className="choice__card-text">Физика</span>
-                    </a>
-                  </div>
-                </section>
-
-                {/* Продолжить обучение */}
-                <section className="editable-section">
-                  <div className="editable-section__inner">
-                    <div className="editable-section__header">
-                      <h1 className="editable-section__title">Продолжить обучение</h1>
-                      <div className="editable-section__nav">
-                        <button className="editable-section__nav-button editable-section__nav-button--prev">
-                          <img
-                            src="/img/svg/chevron-left-2.svg"
-                            alt="Предыдущие"
-                            className="editable-section__nav-icon editable-section__nav-icon--prev"
-                          />
-                        </button>
-                        <button className="editable-section__nav-button editable-section__nav-button--next">
-                          <img
-                            src="/img/svg/chevron-right-2.svg"
-                            alt="Следующие"
-                            className="editable-section__nav-icon editable-section__nav-icon--next"
-                          />
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="editable-section__cards-container">
-                      <div className="editable-section__cards">
-                        <a href="#" className="material-card material-card--informatics">
-                          <div className="material-card__icon">
-                            <img
-                              src="/img/svg/informatics-cards.svg"
-                              alt="Информатика"
-                              className="material-card__icon-img"
-                            />
-                          </div>
-
-                          <div className="material-card__header">
-                            <div className="material-card__subject-wrapper">
-                              <span className="material-card__subject material-card__subject--informatics">
-                                Информатика
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="material-card__body">
-                            <h3 className="material-card__title">Разбор ЕГЭ с циклами на питоне</h3>
-                            <div className="material-card__path">
-                              Ануриев Ц.В. {">"} ... {">"} Питон {">"} Циклы {">"} ЕГЭ
-                            </div>
-                          </div>
-
-                          <div className="material-card__progress-wrapper">
-                            <div className="material-card__progress-info">
-                              <div className="progress-bar">
-                                <div className="progress-fill" style={{ width: "75%" }} />
-                              </div>
-                              <span className="progress-text">
-                                <span className="progress-text--current">8</span>
-                                <span className="progress-text--separator">/</span>
-                                <span className="progress-text--total">10</span>
-                              </span>
-                            </div>
-                            <p className="material-card__progress-label">Пройдено уроков из раздела</p>
-                          </div>
-                        </a>
-
-                        <a href="#" className="material-card material-card--math">
-                          <div className="material-card__icon">
-                            <img
-                              src="/img/svg/math-2.svg"
-                              alt="Математика"
-                              className="material-card__icon-img"
-                            />
-                          </div>
-
-                          <div className="material-card__header">
-                            <div className="material-card__subject-wrapper">
-                              <span className="material-card__subject material-card__subject--math">
-                                Математика
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="material-card__body">
-                            <h3 className="material-card__title">Тригонометрия: формулы и графики</h3>
-                            <div className="material-card__path">
-                              Алгебра {">"} Тригонометрия {">"} Формулы
-                            </div>
-                          </div>
-
-                          <div className="material-card__progress-wrapper">
-                            <div className="material-card__progress-info">
-                              <div className="progress-bar">
-                                <div className="progress-fill" style={{ width: "20%" }} />
-                              </div>
-                              <span className="progress-text">
-                                <span className="progress-text--current">2</span>
-                                <span className="progress-text--separator">/</span>
-                                <span className="progress-text--total">4</span>
-                              </span>
-                            </div>
-                            <p className="material-card__progress-label">Пройдено уроков из раздела</p>
-                          </div>
-                        </a>
-
-                        <a href="#" className="material-card material-card--physics">
-                          <div className="material-card__icon">
-                            <img
-                              src="/img/svg/physics-2.svg"
-                              alt="Физика"
-                              className="material-card__icon-img"
-                            />
-                          </div>
-
-                          <div className="material-card__header">
-                            <div className="material-card__subject-wrapper">
-                              <span className="material-card__subject material-card__subject--physics">
-                                Физика
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="material-card__body">
-                            <h3 className="material-card__title">Законы Ньютона и их применение</h3>
-                            <div className="material-card__path">
-                              Механика {">"} Динамика {">"} Законы Ньютона
-                            </div>
-                          </div>
-
-                          <div className="material-card__progress-wrapper">
-                            <div className="material-card__progress-info">
-                              <div className="progress-bar">
-                                <div className="progress-fill" style={{ width: "40%" }} />
-                              </div>
-                              <span className="progress-text">
-                                <span className="progress-text--current">4</span>
-                                <span className="progress-text--separator">/</span>
-                                <span className="progress-text--total">10</span>
-                              </span>
-                            </div>
-                            <p className="material-card__progress-label">Пройдено уроков из раздела</p>
-                          </div>
-                        </a>
-
-                        <a href="#" className="material-card material-card--chemistry">
-                          <div className="material-card__icon">
-                            <img
-                              src="/img/svg/chemistry-2.svg"
-                              alt="Химия"
-                              className="material-card__icon-img"
-                            />
-                          </div>
-
-                          <div className="material-card__header">
-                            <div className="material-card__subject-wrapper">
-                              <span className="material-card__subject material-card__subject--chemistry">
-                                Химия
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="material-card__body">
-                            <h3 className="material-card__title">Органическая химия: углеводороды</h3>
-                            <div className="material-card__path">
-                              Органическая химия {">"} Углеводороды {">"} Алканы
-                            </div>
-                          </div>
-
-                          <div className="material-card__progress-wrapper">
-                            <div className="material-card__progress-info">
-                              <div className="progress-bar">
-                                <div className="progress-fill" style={{ width: "60%" }} />
-                              </div>
-                              <span className="progress-text">
-                                <span className="progress-text--current">6</span>
-                                <span className="progress-text--separator">/</span>
-                                <span className="progress-text--total">10</span>
-                              </span>
-                            </div>
-                            <p className="material-card__progress-label">Пройдено уроков из раздела</p>
-                          </div>
-                        </a>
-
-                        <a href="#" className="material-card material-card--history">
-                          <div className="material-card__icon">
-                            <img
-                              src="/img/svg/history-2.svg"
-                              alt="История"
-                              className="material-card__icon-img"
-                            />
-                          </div>
-
-                          <div className="material-card__header">
-                            <div className="material-card__subject-wrapper">
-                              <span className="material-card__subject material-card__subject--history">
-                                История
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="material-card__body">
-                            <h3 className="material-card__title">
-                              Эпоха Петра I: реформы и преобразования
-                            </h3>
-                            <div className="material-card__path">
-                              Российская история {">"} XVIII век {">"} Петр I
-                            </div>
-                          </div>
-
-                          <div className="material-card__progress-wrapper">
-                            <div className="material-card__progress-info">
-                              <div className="progress-bar">
-                                <div className="progress-fill" style={{ width: "90%" }} />
-                              </div>
-                              <span className="progress-text">
-                                <span className="progress-text--current">9</span>
-                                <span className="progress-text--separator">/</span>
-                                <span className="progress-text--total">10</span>
-                              </span>
-                            </div>
-                            <p className="material-card__progress-label">Пройдено уроков из раздела</p>
-                          </div>
-                        </a>
-
-                        <a href="#" className="material-card material-card--biology">
-                          <div className="material-card__icon">
-                            <img
-                              src="/img/svg/biology-2.png"
-                              alt="Биология"
-                              className="material-card__icon-img"
-                            />
-                          </div>
-
-                          <div className="material-card__header">
-                            <div className="material-card__subject-wrapper">
-                              <span className="material-card__subject material-card__subject--biology">
-                                Биология
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="material-card__body">
-                            <h3 className="material-card__title">
-                              Строение клетки: органоиды и их функции
-                            </h3>
-                            <div className="material-card__path">
-                              Цитология {">"} Клеточное строение {">"} Органоиды
-                            </div>
-                          </div>
-
-                          <div className="material-card__progress-wrapper">
-                            <div className="material-card__progress-info">
-                              <div className="progress-bar">
-                                <div className="progress-fill" style={{ width: "30%" }} />
-                              </div>
-                              <span className="progress-text">
-                                <span className="progress-text--current">3</span>
-                                <span className="progress-text--separator">/</span>
-                                <span className="progress-text--total">10</span>
-                              </span>
-                            </div>
-                            <p className="material-card__progress-label">Пройдено уроков из раздела</p>
-                          </div>
-                        </a>
-
-                        <a href="#" className="material-card material-card--social">
-                          <div className="material-card__icon">
-                            <img
-                              src="/img/svg/social-2.svg"
-                              alt="Обществознание"
-                              className="material-card__icon-img"
-                            />
-                          </div>
-
-                          <div className="material-card__header">
-                            <div className="material-card__subject-wrapper">
-                              <span className="material-card__subject material-card__subject--social">
-                                Обществознание
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="material-card__body">
-                            <h3 className="material-card__title">
-                              Политическая система: государство и право
-                            </h3>
-                            <div className="material-card__path">
-                              Обществознание {">"} Политика {">"} Государство
-                            </div>
-                          </div>
-
-                          <div className="material-card__progress-wrapper">
-                            <div className="material-card__progress-info">
-                              <div className="progress-bar">
-                                <div className="progress-fill" style={{ width: "70%" }} />
-                              </div>
-                              <span className="progress-text">
-                                <span className="progress-text--current">7</span>
-                                <span className="progress-text--separator">/</span>
-                                <span className="progress-text--total">10</span>
-                              </span>
-                            </div>
-                            <p className="material-card__progress-label">Пройдено уроков из раздела</p>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                {/* Подобрали для вас уроки */}
-                <section className="recommended-lessons">
-                  <header className="recommended-lessons__header">
-                    <h1 className="recommended-lessons__title">Подобрали для вас уроки</h1>
-                    <div className="dropdown">
-                        <button className="dropdown__toggle" data-dropdown="subject">
-                            Предмет
-                            <img
-                                src="/img/svg/arrow-bottom.svg"
-                                alt=""
-                                className="dropdown__icon"
-                            />
-                        </button>
-
-                        <div className="dropdown__menu">
-                            <label className="dropdown__item">
-                                <input type="checkbox" defaultChecked />
-                                <span>Обществознание</span>
-                            </label>
-
-                            <label className="dropdown__item">
-                                <input type="checkbox" defaultChecked />
-                                <span>Химия</span>
-                            </label>
-
-                            <label className="dropdown__item">
-                                <input type="checkbox" defaultChecked />
-                                <span>Астрономия</span>
-                            </label>
-                        </div>
-                    </div>
-                  </header>
-
-                  <div className="recommended-lessons__list">
-                    {/* Обществознание */}
-                    <article className="lesson-card lesson-card--social">
-                      <div className="lesson-card__icon"></div>
-
-                      <div className="lesson-card__content">
-                        <div className="lesson-card__subject-header">
-                          <span className="material-card__subject material-card__subject--social">
-                            Обществознание
-                          </span>
-
-                          <div className="lesson-card__badges">
-                            <span className="lesson-card__badge">8 класс</span>
-                            <span className="lesson-card__badge">№11 ЕГЭ</span>
-
-                            <span className="lesson-card__badge lesson-card__badge--editor">
-                              <img
-                                src="./img/svg/award.svg"
-                                alt="Награда"
-                                className="lesson-card__badge-icon"
-                              />
-                              Выбор редакции
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="lesson-card__title-row">
-                          <h3 className="lesson-card__title">
-                            Государство как основной институт политической системы
-                          </h3>
-
-                          <div className="lesson-card__stats">
-                              <div className="lesson-card__stats-group">
-                                  <img
-                                      className="lesson-card__eye-icon"
-                                      src="./img/svg/eye.svg"
-                                      alt="Просмотры"
-                                  />
-                                  <span className="lesson-card__stats-number">1208</span>
-                              </div>
-
-                              <div className="lesson-card__stats-group">
-                                  <span className="lesson-card__stars">☆</span>
-                                  <span className="lesson-card__stats-number">5.0</span>
-                              </div>
-                          </div>               
-                        </div>
-
-                        <div className="lesson-card__path-row">
-                          <div className="lesson-card__path">
-                            Иванова А.А. {">"} Обществознание {">"} Политическое устройство {">"} Государство
-                          </div>
-                          <a className="lesson-card__link" href="#">
-                            <img className="lesson-card__link-arrow" src="./img/svg/arrow-right.svg" alt="→" />
-                          </a>
-                        </div>
-                      </div>
-                    </article>
-
-                    {/* Химия */}
-                    <article className="lesson-card lesson-card--chemistry">
-                      <div className="lesson-card__icon"></div>
-
-                      <div className="lesson-card__content">
-                        <div className="lesson-card__subject-header">
-                          <span className="material-card__subject material-card__subject--chemistry">
-                            Химия
-                          </span>
-
-                          <div className="lesson-card__badges">
-                            <span className="lesson-card__badge">8 класс</span>
-                            <span className="lesson-card__badge">№9 ЕГЭ</span>
-                          </div>
-                        </div>
-
-                        <div className="lesson-card__title-row">
-                          <h3 className="lesson-card__title">
-                            Периодическая таблица и закономерности изменения свойств хими...
-                          </h3>
-
-                          <div className="lesson-card__stats">
-                              <div className="lesson-card__stats-group">
-                                  <img
-                                      className="lesson-card__eye-icon"
-                                      src="./img/svg/eye.svg"
-                                      alt="Просмотры"
-                                  />
-                                  <span className="lesson-card__stats-number">1208</span>
-                              </div>
-
-                              <div className="lesson-card__stats-group">
-                                  <span className="lesson-card__stars">☆</span>
-                                  <span className="lesson-card__stats-number">5.0</span>
-                              </div>
-                          </div>
-                        </div>
-
-                        <div className="lesson-card__path-row">
-                          <div className="lesson-card__path">
-                            Иванова А.А. {">"} Химия {">"} 8 класс {">"} Периодический закон и Периодическая система химических систем
-                          </div>
-                          <a className="lesson-card__link" href="#">
-                            <img className="lesson-card__link-arrow" src="./img/svg/arrow-right.svg" alt="→" />
-                          </a>
-                        </div>
-                      </div>
-                    </article>
-
-                    {/* Астрономия */}
-                    <article className="lesson-card lesson-card--astronomy">
-                      <div className="lesson-card__icon"></div>
-
-                      <div className="lesson-card__content">
-                        <div className="lesson-card__subject-header">
-                          <span className="material-card__subject material-card__subject--astronomy">
-                            Астрономия
-                          </span>
-
-                          <div className="lesson-card__badges">
-                            <span className="lesson-card__badge">11 класс</span>
-
-                            <span className="lesson-card__badge lesson-card__badge--editor">
-                              <img
-                                src="./img/svg/award.svg"
-                                alt="Награда"
-                                className="lesson-card__badge-icon"
-                              />
-                              Выбор редакции
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="lesson-card__title-row">
-                          <h3 className="lesson-card__title">
-                            Солнечная система: планеты земной группы и планеты гиганты, мал...
-                          </h3>
-
-                          <div className="lesson-card__stats">
-                            <div className="lesson-card__stats-group">
-                                <img
-                                    className="lesson-card__eye-icon"
-                                    src="./img/svg/eye.svg"
-                                    alt="Просмотры"
-                                />
-                                <span className="lesson-card__stats-number">1208</span>
-                            </div>
-                            <div className="lesson-card__stats-group">
-                                <span className="lesson-card__stars">☆</span>
-                                <span className="lesson-card__stats-number">5.0</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="lesson-card__path-row">
-                          <div className="lesson-card__path">
-                            Иванова А.А. {">"} Астрономия {">"} 11 класс {">"} Солнечная система
-                          </div>
-                          <a className="lesson-card__link" href="#">
-                            <img className="lesson-card__link-arrow" src="./img/svg/arrow-right.svg" alt="→" />
-                          </a>
-                        </div>
-                      </div>
-                    </article>
-                  </div>
-                </section>
-              </div>
-            </div>
-
-            {/* Правая колонка (как в HTML) */}
-            <div className="main__right">
-              <section className="stats-card">
-                <div className="stats-card__header">
-                  <h2 className="stats-card__title">Занятия 6 дней подряд</h2>
-                </div>
-                <div className="streak-content">
-                  <div className="streak-number">6</div>
-                  <p className="streak-text">Дней активного обучения</p>
-                  <button className="streak-button">Все дни</button>
-                </div>
-              </section>
-
-              <section className="promo-card">
-                <div className="promo-card__content">
-                  <h2 className="promo-card__title">Вам еще не создавали материал</h2>
-                  <p className="promo-card__subtitle">Начните прямо сейчас</p>
-                  <button className="promo-card__button">Перейти</button>
-                </div>
-              </section>
-
-              <section className="teachers-card">
-                <div className="teachers-card__header">
-                  <h2 className="teachers-card__title">Популярные преподаватели</h2>
-                  <button className="teachers-card__all">
-                    Все
-                    <img src="/img/svg/arrow-right.svg" alt="" className="teachers-card__all-icon" />
-                  </button>
-                </div>
-
-                <ul className="teachers-card__list">
-                  <li className="teacher">
-                    <img
-                      className="teacher__avatar"
-                      src="/img/teachers/teacher-1.png"
-                      alt="Горобец Наталья Александровна"
-                    />
-                    <div className="teacher__content">
-                      <div className="teacher__top">
-                        <div className="teacher__info">
-                          <div className="teacher__name">Горобец Наталья Александровна</div>
-                          <div className="teacher__tags">
-                            <span className="teacher-tag teacher-tag--blue">Физика</span>
-                            <span className="teacher-tag teacher-tag--green">Математика</span>
-                          </div>
-                        </div>
-                        <div className="teacher__stats">
-                          <div className="teacher__stat">
-                            <span className="teacher__stat-icon">👁</span>
-                            <span className="teacher__stat-value">1208</span>
-                          </div>
-                          <div className="teacher__stat">
-                            <span className="teacher__stat-icon">★</span>
-                            <span className="teacher__stat-value">5.0</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="teacher__bottom">
-                        <span className="teacher-label teacher-label--editor">Выбор редакции</span>
-                        <div className="teacher__materials">
-                          <span className="teacher__materials-icon">📚</span>
-                          <span className="teacher__materials-count">123</span>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-
-                  <li className="teacher">
-                    <img
-                      className="teacher__avatar"
-                      src="/img/teachers/teacher-2.png"
-                      alt="Алексеев Владимир Бедросович"
-                    />
-                    <div className="teacher__content">
-                      <div className="teacher__top">
-                        <div className="teacher__info">
-                          <div className="teacher__name">Алексеев Владимир Бедросович</div>
-                          <div className="teacher__tags">
-                            <span className="teacher-tag teacher-tag--orange">Обществознание</span>
-                            <span className="teacher-tag teacher-tag--yellow">История</span>
-                          </div>
-                        </div>
-                        <div className="teacher__stats">
-                          <div className="teacher__stat">
-                            <span className="teacher__stat-icon">👁</span>
-                            <span className="teacher__stat-value">568</span>
-                          </div>
-                          <div className="teacher__stat">
-                            <span className="teacher__stat-icon">★</span>
-                            <span className="teacher__stat-value">4.8</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="teacher__bottom">
-                        <span className="teacher-label teacher-label--editor">Выбор редакции</span>
-                        <div className="teacher__materials">
-                          <span className="teacher__materials-icon">📚</span>
-                          <span className="teacher__materials-count">45</span>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-
-                  <li className="teacher">
-                    <img
-                      className="teacher__avatar"
-                      src="/img/teachers/teacher-3.png"
-                      alt="Кузьмин Юрий Олегович"
-                    />
-                    <div className="teacher__content">
-                      <div className="teacher__top">
-                        <div className="teacher__info">
-                          <div className="teacher__name">Кузьмин Юрий Олегович</div>
-                          <div className="teacher__tags">
-                            <span className="teacher-tag teacher-tag--purple">Физика</span>
-                            <span className="teacher-tag teacher-tag--blue-light">Астрономия</span>
-                          </div>
-                        </div>
-                        <div className="teacher__stats">
-                          <div className="teacher__stat">
-                            <span className="teacher__stat-icon">👁</span>
-                            <span className="teacher__stat-value">282</span>
-                          </div>
-                          <div className="teacher__stat">
-                            <span className="teacher__stat-icon">★</span>
-                            <span className="teacher__stat-value">4.8</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="teacher__bottom">
-                        <span className="teacher-label teacher-label--editor">Выбор редакции</span>
-                        <div className="teacher__materials">
-                          <span className="teacher__materials-icon">📚</span>
-                          <span className="teacher__materials-count">12</span>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </section>
+              <button
+                onClick={() => loadMaterials(localStorage.getItem('accessToken'))}
+                style={{
+                  padding: '12px 24px',
+                  background: '#4CAF50',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontSize: '1rem',
+                  fontWeight: 'bold',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}
+              >
+                <span>🔄</span> Обновить список
+              </button>
             </div>
           </div>
-        </main>
+
+          {/* Список материалов */}
+          <div>
+            <h2 style={{
+              fontSize: '1.8rem',
+              marginBottom: '30px',
+              color: '#333',
+              borderBottom: '2px solid #e0e0e0',
+              paddingBottom: '10px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center'
+            }}>
+              <span>Доступные материалы</span>
+              <span style={{
+                fontSize: '1rem',
+                color: '#666',
+                background: '#f0f0f0',
+                padding: '5px 15px',
+                borderRadius: '20px'
+              }}>
+                {materials.length} материалов
+              </span>
+            </h2>
+
+            {error && (
+              <div style={{
+                background: '#ffebee',
+                color: '#c62828',
+                padding: '15px',
+                borderRadius: '8px',
+                marginBottom: '20px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px'
+              }}>
+                <span>⚠️</span>
+                <span>{error}</span>
+              </div>
+            )}
+
+            {materials.length === 0 ? (
+              <div style={{
+                textAlign: 'center',
+                padding: '80px 40px',
+                background: 'white',
+                borderRadius: '15px',
+                boxShadow: '0 5px 20px rgba(0,0,0,0.1)',
+                maxWidth: '600px',
+                margin: '0 auto'
+              }}>
+                <div style={{
+                  fontSize: '4rem',
+                  marginBottom: '20px',
+                  opacity: 0.3
+                }}>
+                  📚
+                </div>
+                <div style={{
+                  fontSize: '1.8rem',
+                  marginBottom: '15px',
+                  color: '#333'
+                }}>
+                  Материалов пока нет
+                </div>
+                <p style={{
+                  color: '#666',
+                  marginBottom: '30px',
+                  fontSize: '1.1rem',
+                  lineHeight: '1.6'
+                }}>
+                  Здесь появятся учебные материалы,<br />добавленные преподавателями
+                </p>
+              </div>
+            ) : (
+              <>
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
+                  gap: '25px',
+                  marginBottom: '50px'
+                }}>
+                  {materials.map(material => {
+                    // Определяем цвет по предмету
+                    const getSubjectColor = (subject) => {
+                      const mathSubjects = ['mathematics', 'algebra', 'calculus', 'geometry',
+                                          'probability', 'statistics', 'trigonometry'];
+                      const programmingSubjects = ['programming', 'python', 'javascript', 'java',
+                                                 'algorithms', 'datascience', 'frontend'];
+                      const physicsSubjects = ['physics', 'mechanics', 'kinematics', 'electrodynamics',
+                                             'optics', 'thermodynamics', 'quantum'];
+
+                      if (mathSubjects.includes(subject)) return '#4CAF50';
+                      if (programmingSubjects.includes(subject)) return '#2196F3';
+                      if (physicsSubjects.includes(subject)) return '#FF9800';
+                      return '#9C27B0';
+                    };
+
+                    return (
+                      <div
+                        key={material.id}
+                        style={{
+                          background: 'white',
+                          borderRadius: '12px',
+                          padding: '25px',
+                          boxShadow: '0 4px 15px rgba(0,0,0,0.08)',
+                          transition: 'all 0.3s ease',
+                          cursor: 'pointer',
+                          borderLeft: `6px solid ${getSubjectColor(material.subject)}`,
+                          position: 'relative',
+                          overflow: 'hidden'
+                        }}
+                        onClick={() => navigate(`/materials/${material.id}`)}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = 'translateY(-8px)';
+                          e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.12)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = 'translateY(0)';
+                          e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.08)';
+                        }}
+                      >
+                        {/* Бейдж рейтинга */}
+                        {material.rating > 0 && (
+                          <div style={{
+                            position: 'absolute',
+                            top: '15px',
+                            right: '15px',
+                            background: '#FF9800',
+                            color: 'white',
+                            padding: '5px 10px',
+                            borderRadius: '20px',
+                            fontSize: '0.8rem',
+                            fontWeight: 'bold',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '4px'
+                          }}>
+                            ⭐ {material.rating.toFixed(1)}
+                          </div>
+                        )}
+
+                        {/* Заголовок */}
+                        <div style={{
+                          fontSize: '1.3rem',
+                          fontWeight: 'bold',
+                          marginBottom: '15px',
+                          color: '#333',
+                          paddingRight: material.rating > 0 ? '60px' : '0'
+                        }}>
+                          {material.title}
+                        </div>
+
+                        {/* Предмет */}
+                        <div style={{
+                          display: 'inline-block',
+                          background: getSubjectColor(material.subject) + '20', // 20% opacity
+                          color: getSubjectColor(material.subject),
+                          padding: '6px 14px',
+                          borderRadius: '20px',
+                          fontSize: '0.85rem',
+                          fontWeight: '600',
+                          marginBottom: '15px',
+                          border: `1px solid ${getSubjectColor(material.subject)}30`
+                        }}>
+                          {material.subject}
+                        </div>
+
+                        {/* Автор */}
+                        <div style={{
+                          color: '#666',
+                          marginBottom: '15px',
+                          fontSize: '0.95rem',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '10px',
+                          padding: '10px',
+                          background: '#f9f9f9',
+                          borderRadius: '8px'
+                        }}>
+                          <div style={{
+                            width: '36px',
+                            height: '36px',
+                            borderRadius: '50%',
+                            background: '#e0e0e0',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '1.2rem'
+                          }}>
+                            👤
+                          </div>
+                          <div>
+                            <div style={{ fontWeight: '500' }}>{material.author?.name || 'Неизвестный автор'}</div>
+                            <div style={{ fontSize: '0.8rem', color: '#888' }}>Преподаватель</div>
+                          </div>
+                        </div>
+
+                        {/* Статистика */}
+                        <div style={{
+                          display: 'flex',
+                          gap: '15px',
+                          marginTop: '20px',
+                          paddingTop: '15px',
+                          borderTop: '1px solid #eee'
+                        }}>
+                          <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            color: '#666',
+                            fontSize: '0.9rem'
+                          }}>
+                            <span style={{ fontSize: '1.1rem' }}>👥</span>
+                            <span>{material.studentsCount || 0} студентов</span>
+                          </div>
+
+                          <div style={{
+                            marginLeft: 'auto',
+                            color: '#2196F3',
+                            fontSize: '0.9rem',
+                            fontWeight: '500',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '5px'
+                          }}>
+                            Открыть
+                            <span style={{ fontSize: '1.2rem' }}>→</span>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Статистика */}
+                <div style={{
+                  marginTop: '50px',
+                  padding: '30px',
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  borderRadius: '15px',
+                  boxShadow: '0 5px 20px rgba(102, 126, 234, 0.3)',
+                  color: 'white'
+                }}>
+                  <div style={{
+                    fontSize: '1.5rem',
+                    fontWeight: 'bold',
+                    marginBottom: '20px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px'
+                  }}>
+                    <span>📊</span>
+                    <span>Статистика материалов</span>
+                  </div>
+
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                    gap: '20px'
+                  }}>
+                    <div style={{
+                      padding: '15px',
+                      background: 'rgba(255, 255, 255, 0.1)',
+                      borderRadius: '10px',
+                      backdropFilter: 'blur(10px)'
+                    }}>
+                      <div style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '5px' }}>
+                        {materials.length}
+                      </div>
+                      <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Всего материалов</div>
+                    </div>
+
+                    <div style={{
+                      padding: '15px',
+                      background: 'rgba(255, 255, 255, 0.1)',
+                      borderRadius: '10px',
+                      backdropFilter: 'blur(10px)'
+                    }}>
+                      <div style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '5px' }}>
+                        {[...new Set(materials.map(m => m.subject))].length}
+                      </div>
+                      <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Разных предметов</div>
+                    </div>
+
+                    <div style={{
+                      padding: '15px',
+                      background: 'rgba(255, 255, 255, 0.1)',
+                      borderRadius: '10px',
+                      backdropFilter: 'blur(10px)'
+                    }}>
+                      <div style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '5px' }}>
+                        {materials.reduce((sum, m) => sum + (m.studentsCount || 0), 0)}
+                      </div>
+                      <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Всего студентов</div>
+                    </div>
+
+                    <div style={{
+                      padding: '15px',
+                      background: 'rgba(255, 255, 255, 0.1)',
+                      borderRadius: '10px',
+                      backdropFilter: 'blur(10px)'
+                    }}>
+                      <div style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '5px' }}>
+                        {materials.filter(m => m.rating > 0).length}
+                      </div>
+                      <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Материалов с рейтингом</div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

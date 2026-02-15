@@ -5,7 +5,7 @@ import { PublicHeader } from "../../../../widgets/public-header";
 import { WelcomeBlock } from "../../../../widgets/welcome-block";
 import { FloatingInput } from "../../../../shared/ui/FloatingInput/FloatingInput";
 import { PasswordInput } from "../../../../shared/ui/PasswordInput/PasswordInput";
-import { translateError, validationMessages } from "../../../../utils/translations"; // ? ИМПОРТ
+import { translateError, validationMessages } from "../../../../utils/translations"; // ← ИМПОРТ
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -88,7 +88,21 @@ export function LoginPage() {
           localStorage.setItem("rememberMe", "true");
         }
 
-        navigate("/");
+        // Перенаправляем в зависимости от роли
+      const userRole = data.user.role;
+      switch (userRole) {
+        case 'teacher':
+          navigate('/teacher/dashboard');
+          break;
+        case 'student':
+          navigate('/student/dashboard');
+          break;
+        case 'admin':
+          navigate('/admin/dashboard');
+          break;
+        default:
+          navigate('/');
+      }
       } else {
         // Используем общую функцию перевода
         const translatedError = translateError(data.error || "Ошибка входа");
@@ -150,7 +164,7 @@ export function LoginPage() {
               borderRadius: "5px",
               border: "1px solid #ff4444"
             }}>
-              ? {error}
+              ⚠ {error}
             </div>
           )}
 
@@ -218,7 +232,7 @@ export function LoginPage() {
               </button>
 
               <div className="register-link">
-                Ещё нет аккаунта? <Link to="/choice-role">Зарегистрироваться</Link>
+                Ещё нет аккаунта? <Link to="/registration">Зарегистрироваться</Link>
               </div>
             </div>
           </form>
