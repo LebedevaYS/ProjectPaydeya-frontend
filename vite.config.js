@@ -5,12 +5,12 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   define: {
-    'import.meta.env.VITE_API_URL': JSON.stringify('https://paydeya-backend.onrender.com')
+    'import.meta.env.VITE_API_URL': JSON.stringify('https://paydeya.test-try.crazedns.ru')
   },
   server: {
     proxy: {
       '/api': {
-        target: 'https://paydeya-backend.onrender.com',
+        target: 'https://paydeya.test-try.crazedns.ru',
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, '/api/v1')
