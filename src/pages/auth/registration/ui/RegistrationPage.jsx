@@ -1,11 +1,11 @@
-// RegistrationPage.jsx
+import "./RegistrationPage.css";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { PublicHeader } from "../../../../widgets/public-header";
 import { WelcomeBlock } from "../../../../widgets/welcome-block";
 import { FloatingInput } from "../../../../shared/ui/FloatingInput/FloatingInput";
 import { PasswordInput } from "../../../../shared/ui/PasswordInput/PasswordInput";
-import { translateError, validationMessages } from "../../../../utils/translations"; // ← ИМПОРТ
+import { translateError, validationMessages } from "@/shared/lib/translations";
 
 export function RegistrationPage() {
   const navigate = useNavigate();
@@ -19,19 +19,19 @@ export function RegistrationPage() {
     email: "",
     password: "",
     confirmPassword: "",
-    agreeToTerms: false
+    agreeToTerms: false,
   });
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const API_BASE = '/api';
+  const API_BASE = "/api";
 
   const handleInputChange = (e) => {
     const { id, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [id]: type === "checkbox" ? checked : value
+      [id]: type === "checkbox" ? checked : value,
     }));
     if (error) setError("");
   };
@@ -99,14 +99,14 @@ export function RegistrationPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json"
+          Accept: "application/json",
         },
         body: JSON.stringify({
           email: formData.email,
           password: formData.password,
-          fullName: fullName,
-          role: role
-        })
+          fullName,
+          role,
+        }),
       });
 
       const data = await response.json();
@@ -116,23 +116,21 @@ export function RegistrationPage() {
         localStorage.setItem("refreshToken", data.refreshToken);
         localStorage.setItem("user", JSON.stringify(data.user));
 
-      // Перенаправляем в зависимости от роли
         const userRole = data.user.role;
         switch (userRole) {
-          case 'teacher':
-            navigate('/teacher/dashboard');
+          case "teacher":
+            navigate("/teacher/dashboard");
             break;
-          case 'student':
-            navigate('/student/dashboard');
+          case "student":
+            navigate("/student/dashboard");
             break;
-          case 'admin':
-            navigate('/admin/dashboard');
+          case "admin":
+            navigate("/admin/dashboard");
             break;
           default:
-            navigate('/');
+            navigate("/");
         }
       } else {
-        // Используем общую функцию перевода
         const translatedError = translateError(data.error || "Ошибка регистрации");
         setError(translatedError);
       }
@@ -151,19 +149,22 @@ export function RegistrationPage() {
       <div className="main-container">
         <div className="registration-section">
           <div className="registration-title">
-            Регистрация {role === "teacher" ? "преподавателя" : "студента"}
+            Регистрация {role === "teacher" ? "преподавателя" : "ученика"}
           </div>
 
           {error && (
-            <div className="error-message" style={{
-              color: "red",
-              marginBottom: "15px",
-              padding: "10px",
-              backgroundColor: "#ffe6e6",
-              borderRadius: "5px",
-              border: "1px solid #ff4444"
-            }}>
-              ⚠ {error}
+            <div
+              className="error-message"
+              style={{
+                color: "red",
+                marginBottom: "15px",
+                padding: "10px",
+                backgroundColor: "#ffe6e6",
+                borderRadius: "5px",
+                border: "1px solid #ff4444",
+              }}
+            >
+              {error}
             </div>
           )}
 
@@ -232,9 +233,14 @@ export function RegistrationPage() {
                 disabled={isLoading}
               />
               <label htmlFor="agreeToTerms">
-                Соглашаюсь на обработку моих персональных данных в соответствии с{" "}
-                <a href="#" style={{ color: "#4A6FFF" }}>Политикой конфиденциальности</a> и принимаю условия{" "}
-                <a href="#" style={{ color: "#4A6FFF" }}>Лицензионного соглашения</a>
+                Я соглашаюсь на обработку моих персональных данных и принимаю{" "}
+                <a href="#" style={{ color: "#4A6FFF" }}>
+                  условия пользовательского соглашения
+                </a>{" "}
+                и{" "}
+                <a href="#" style={{ color: "#4A6FFF" }}>
+                  политику конфиденциальности
+                </a>
                 <span className="required">*</span>
               </label>
             </div>
@@ -246,14 +252,17 @@ export function RegistrationPage() {
                 disabled={isLoading}
                 style={{
                   opacity: isLoading ? 0.7 : 1,
-                  cursor: isLoading ? "not-allowed" : "pointer"
+                  cursor: isLoading ? "not-allowed" : "pointer",
                 }}
               >
                 {isLoading ? "Регистрация..." : "Зарегистрироваться"}
               </button>
 
               <div className="login-link">
-                Уже есть аккаунт? <Link to="/login" style={{ color: "#4A6FFF" }}>Войти</Link>
+                Уже есть аккаунт?{" "}
+                <Link to="/login" style={{ color: "#4A6FFF" }}>
+                  Войти
+                </Link>
               </div>
             </div>
           </form>

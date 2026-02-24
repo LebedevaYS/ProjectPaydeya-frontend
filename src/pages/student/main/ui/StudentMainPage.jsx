@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import "../../../../shared/styles/dashboard.css";
-import "../../../../shared/styles/main_student.css";
+import { Link } from "react-router-dom";
+import "./StudentMainPage.css";
 
 export function StudentMainPage() {
   // Слайдер подсветки в боковом меню
@@ -155,11 +155,13 @@ export function StudentMainPage() {
         <aside className="sidebar sidebar--left">
           <nav className="sidebar-nav">
             <div className="sidebar-nav__header">
-              <img
-                className="sidebar-nav__logo"
-                src="/img/svg/sidebar_logo.svg"
-                alt=""
-              />
+              <Link to="/">
+                <img
+                  className="sidebar-nav__logo"
+                  src="/img/svg/sidebar_logo.svg"
+                  alt="Пайдейя"
+                />
+              </Link>
             </div>
 
             <div className="sidebar-nav__menu-container">

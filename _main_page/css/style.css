@@ -71,7 +71,7 @@ body {
    ========================================================================== */
 
 .header {
-  /* position: sticky; */ /* фиксация верхней менюшки при скроллинге */
+  /* position: sticky; */ /* �������� ������� ������� ��� ���������� */
   top: 0;
   width: 100%;
 }
@@ -243,7 +243,7 @@ body {
   gap: 16px;
 }
 
-/* Общие стили для фич-карточек */
+/* ����� ����� ��� ���-�������� */
 .intro__feature {
   text-decoration: none;
     cursor: pointer;
@@ -269,7 +269,7 @@ body {
   transform: rotate(45deg);
 }
 
-/* Модификаторы для карточек */
+/* ������������ ��� �������� */
 .intro__feature--teachers {
   background: var(--primary-blue);
   background-image: url(../img/svg/teacher-icon.svg);
@@ -351,7 +351,7 @@ body {
     min-height: 302px;
 }
 
-/* Общие стили для карточек студентов */
+/* ����� ����� ��� �������� ��������� */
 .students__card {
     flex: 1;
     border-radius: 16px;
@@ -361,7 +361,7 @@ body {
     transition: var(--transition);
 }
 
-/* Модификаторы карточек по цветам */
+/* ������������ �������� �� ������ */
 .students__card--white {
     background: var(--background-white);
     background-image: url(../img/svg/students_1.svg), url(../img/svg/patt_1.svg);
@@ -397,7 +397,7 @@ body {
     background-size: auto, cover;
 }
 
-/* Заголовки карточек */
+/* ��������� �������� */
 .students__card-title {
     font-size: 24px;
     font-weight: 500;
@@ -411,7 +411,7 @@ body {
     max-width: 311px;
 }
 
-/* Части заголовков */
+/* ����� ���������� */
 .students__card-part--primary {
     color: #212529;
 }
@@ -442,7 +442,7 @@ body {
     line-height: 1;
 }
 
-/* Текстовые стили */
+/* ��������� ����� */
 .students__card-text {
     font-size: 18px;
     margin: 0;
@@ -463,7 +463,7 @@ body {
     max-width: 309px;
 }
 
-/* Кнопка */
+/* ������ */
 .students__card-button {
     display: inline-flex;
     align-items: center;
@@ -557,7 +557,7 @@ body {
   gap: 12px;
 }
 
-/* Общие стили для карточек выбора */
+/* ����� ����� ��� �������� ������ */
 .choice__card {
     flex: 0 0 calc(16.666% - 14px);
     min-width: 208.5px;
@@ -581,7 +581,7 @@ body {
     max-width: 117px;
 }
 
-/* Модификаторы для предметов */
+/* ������������ ��� ��������� */
 .choice__card--math {
     background-image: url(../img/svg/math-1.svg);
 }
@@ -698,7 +698,7 @@ body {
     gap: var(--card-gap);
 }
 
-/* Общие стили для карточек преподавателей */
+/* ����� ����� ��� �������� �������������� */
 .teachers__card {
     height: 236px;
     padding: 32px 0px 0px 24px;
@@ -710,7 +710,7 @@ body {
     background-position: bottom 0% right 0%;
 }
 
-/* Конкретные карточки */
+/* ���������� �������� */
 .teachers__card--bg-1 {
     background: var(--background-white);
     background-image: url(../img/svg/teachers_1.svg), url(../img/svg/patt_5.svg);
@@ -739,7 +739,7 @@ body {
     var(--gradient-blue);
 }
 
-/* Модификаторы размеров карточек */
+/* ������������ �������� �������� */
 .teachers__card--wide {
     width: 692px;
 }
@@ -748,7 +748,7 @@ body {
     width: 595px;
 }
 
-/* Заголовки карточек */
+/* ��������� �������� */
 .teachers__card-title {
   font-size: 24px;
   font-weight: 500;
@@ -763,7 +763,7 @@ body {
   font-weight: 500;
 }
 
-/* Части заголовков */
+/* ����� ���������� */
 .teachers__card-part--primary {
     color: inherit;
 }
@@ -782,7 +782,7 @@ body {
     line-height: 1;
 }
 
-/* Текстовые стили */
+/* ��������� ����� */
 .teachers__card-text {
   font-size: 18px;
   font-weight: 400;
@@ -806,7 +806,7 @@ body {
   color: #E9ECEF;
 }
 
-/* Кнопка */
+/* ������ */
 .teachers__card-button {
     display: inline-flex;
     align-items: center;
@@ -883,7 +883,7 @@ body {
   flex-direction: column;
 }
 
-/* Кастомные отступы для навигации */
+/* ��������� ������� ��� ��������� */
 .footer__brand {
   margin-bottom: 16px;
 }
@@ -900,7 +900,7 @@ body {
   margin-bottom: 0;
 }
 
-/* Ссылки футера */
+/* ������ ������ */
 .footer__nav-link,
 .footer__link {
   color: var(--text-gray-medium);

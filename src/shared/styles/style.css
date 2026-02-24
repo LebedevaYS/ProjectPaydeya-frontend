@@ -76,7 +76,7 @@
 
 
 .home-page .header {
-  /* position: sticky; */ /* фиксация верхней менюшки при скроллинге */
+  /* position: sticky; */ /* �������� ������� ������� ��� ���������� */
   top: 0;
   width: 100%;
 }
@@ -275,7 +275,7 @@
   gap: 16px;
 }
 
-/* Общие стили для фич-карточек */
+/* ����� ����� ��� ���-�������� */
 
 .home-page .intro__feature {
   text-decoration: none;
@@ -304,7 +304,7 @@
   transform: rotate(45deg);
 }
 
-/* Модификаторы для карточек */
+/* ������������ ��� �������� */
 
 .home-page .intro__feature--teachers {
   background: var(--primary-blue);
@@ -398,7 +398,7 @@
     min-height: 302px;
 }
 
-/* Общие стили для карточек студентов */
+/* ����� ����� ��� �������� ��������� */
 
 .home-page .students__card {
     flex: 1;
@@ -409,7 +409,7 @@
     transition: var(--transition);
 }
 
-/* Модификаторы карточек по цветам */
+/* ������������ �������� �� ������ */
 
 .home-page .students__card--white {
     background: var(--background-white);
@@ -450,7 +450,7 @@
     background-size: auto, cover;
 }
 
-/* Заголовки карточек */
+/* ��������� �������� */
 
 .home-page .students__card-title {
     font-size: 24px;
@@ -466,7 +466,7 @@
     max-width: 311px;
 }
 
-/* Части заголовков */
+/* ����� ���������� */
 
 .home-page .students__card-part--primary {
     color: #212529;
@@ -502,7 +502,7 @@
     line-height: 1;
 }
 
-/* Текстовые стили */
+/* ��������� ����� */
 
 .home-page .students__card-text {
     font-size: 18px;
@@ -527,7 +527,7 @@
     max-width: 309px;
 }
 
-/* Кнопка */
+/* ������ */
 
 .home-page .students__card-button {
     display: inline-flex;
@@ -630,7 +630,7 @@
 }
 
 .home-page .choice__all:hover .choice__all-icon{
-  transform: rotate(45deg); /* поворот при наведении */
+  transform: rotate(45deg); /* ������� ��� ��������� */
 }
 
 
@@ -640,7 +640,7 @@
   gap: 12px;
 }
 
-/* Общие стили для карточек выбора */
+/* ����� ����� ��� �������� ������ */
 
 .home-page .choice__card {
     flex: 0 0 calc(16.666% - 14px);
@@ -666,7 +666,7 @@
     max-width: 117px;
 }
 
-/* Модификаторы для предметов */
+/* ������������ ��� ��������� */
 
 .home-page .choice__card--math {
     background-image: url(../img/svg/math-1.svg);
@@ -811,7 +811,7 @@
     gap: var(--card-gap);
 }
 
-/* Общие стили для карточек преподавателей */
+/* ����� ����� ��� �������� �������������� */
 
 .home-page .teachers__card {
     height: 236px;
@@ -824,7 +824,7 @@
     background-position: bottom 0% right 0%;
 }
 
-/* Конкретные карточки */
+/* ���������� �������� */
 
 .home-page .teachers__card--bg-1 {
     background: var(--background-white);
@@ -857,7 +857,7 @@
     var(--gradient-blue);
 }
 
-/* Модификаторы размеров карточек */
+/* ������������ �������� �������� */
 
 .home-page .teachers__card--wide {
     width: 692px;
@@ -868,7 +868,7 @@
     width: 595px;
 }
 
-/* Заголовки карточек */
+/* ��������� �������� */
 
 .home-page .teachers__card-title {
   font-size: 24px;
@@ -885,7 +885,7 @@
   font-weight: 500;
 }
 
-/* Части заголовков */
+/* ����� ���������� */
 
 .home-page .teachers__card-part--primary {
     color: inherit;
@@ -907,7 +907,7 @@
     line-height: 1;
 }
 
-/* Текстовые стили */
+/* ��������� ����� */
 
 .home-page .teachers__card-text {
   font-size: 18px;
@@ -936,7 +936,7 @@
   color: #E9ECEF;
 }
 
-/* Кнопка */
+/* ������ */
 
 .home-page .teachers__card-button {
     margin-top: 18px;
@@ -1025,7 +1025,7 @@
   flex-direction: column;
 }
 
-/* Кастомные отступы для навигации */
+/* ��������� ������� ��� ��������� */
 
 .home-page .footer__brand {
   margin-bottom: 16px;
@@ -1046,7 +1046,7 @@
   margin-bottom: 0;
 }
 
-/* Ссылки футера */
+/* ������ ������ */
 .footer__nav-link,
 
 .home-page .footer__link {

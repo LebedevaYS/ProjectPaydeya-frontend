@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./PublicHomePage.css";
 
 export function PublicHomePage() {
   const ROUTES = {

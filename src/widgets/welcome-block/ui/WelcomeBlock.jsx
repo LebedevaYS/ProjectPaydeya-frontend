@@ -2,7 +2,7 @@ export function WelcomeBlock() {
   return (
     <div className="welcome-section">
       <div className="welcome-title">
-        Сделаем обучение увлекательным <span className="highlight">вместе</span>
+        Создавайте живые учебные материалы <span className="highlight">быстро</span>
       </div>
 
       <div className="welcome-image">
@@ -10,7 +10,10 @@ export function WelcomeBlock() {
       </div>
 
       <div className="welcome-text">
-        <a>Добро пожаловать в <br />сообщество идей</a>
+        <a>
+          Учитесь с интересом и <br />
+          достигайте целей
+        </a>
         <div className="log_image">
           <img src="/img/svg/log_image.svg" className="img_with_logo" alt="Logo text" />
         </div>

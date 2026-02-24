@@ -5,12 +5,12 @@
    ========================================================================== */
 
 :root {
-  /* Радиусы (единая шкала) */
+  /* ������� (������ �����) */
   --radius-8: 8px;
   --radius-12: 12px;
   --radius-16: 16px;
 
-  /* Контролы */
+  /* �������� */
   --control-padding-y: 12px;
   --control-padding-x: 24px;
 }
@@ -21,7 +21,7 @@
 
 /* Base button/link button */
 .btn {
-  display: inline-block; /* safer than inline-flex: меньше шанс сдвинуть верстку */
+  display: inline-block; /* safer than inline-flex: ������ ���� �������� ������� */
   padding: var(--control-padding-y) var(--control-padding-x);
   border-radius: var(--radius-8);
   text-decoration: none;

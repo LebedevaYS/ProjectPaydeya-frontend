@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { PublicHeader } from "../../../../widgets/public-header";
+import "./ChoiceRolePage.css";
 
 export function ChoiceRolePage() {
   const [hovered, setHovered] = useState(null);

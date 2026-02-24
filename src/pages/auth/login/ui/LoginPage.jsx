@@ -1,29 +1,29 @@
-// LoginPage.jsx
+import "./LoginPage.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { PublicHeader } from "../../../../widgets/public-header";
 import { WelcomeBlock } from "../../../../widgets/welcome-block";
 import { FloatingInput } from "../../../../shared/ui/FloatingInput/FloatingInput";
 import { PasswordInput } from "../../../../shared/ui/PasswordInput/PasswordInput";
-import { translateError, validationMessages } from "../../../../utils/translations"; // ? ИМПОРТ
+import { translateError, validationMessages } from "@/shared/lib/translations";
 
 export function LoginPage() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    rememberMe: false
+    rememberMe: false,
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const API_BASE = '/api';
+  const API_BASE = "/api";
 
   const handleInputChange = (e) => {
     const { id, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [id]: type === "checkbox" ? checked : value
+      [id]: type === "checkbox" ? checked : value,
     }));
     if (error) setError("");
   };
@@ -69,12 +69,12 @@ export function LoginPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json"
+          Accept: "application/json",
         },
         body: JSON.stringify({
           email: formData.email,
-          password: formData.password
-        })
+          password: formData.password,
+        }),
       });
 
       const data = await response.json();
@@ -90,7 +90,6 @@ export function LoginPage() {
 
         navigate("/");
       } else {
-        // Используем общую функцию перевода
         const translatedError = translateError(data.error || "Ошибка входа");
         setError(translatedError);
       }
@@ -121,9 +120,9 @@ export function LoginPage() {
       const data = await response.json();
 
       if (response.ok) {
-        alert("Инструкции по восстановлению пароля отправлены на ваш email");
+        alert("Инструкция по восстановлению пароля отправлена на ваш email");
       } else {
-        const translatedError = translateError(data.error || "Ошибка отправки запроса");
+        const translatedError = translateError(data.error || "Ошибка восстановления пароля");
         alert(translatedError);
       }
     } catch (err) {
@@ -142,15 +141,18 @@ export function LoginPage() {
           <div className="auth-title">Авторизация</div>
 
           {error && (
-            <div className="error-message" style={{
-              color: "red",
-              marginBottom: "15px",
-              padding: "10px",
-              backgroundColor: "#ffe6e6",
-              borderRadius: "5px",
-              border: "1px solid #ff4444"
-            }}>
-              ? {error}
+            <div
+              className="error-message"
+              style={{
+                color: "red",
+                marginBottom: "15px",
+                padding: "10px",
+                backgroundColor: "#ffe6e6",
+                borderRadius: "5px",
+                border: "1px solid #ff4444",
+              }}
+            >
+              {error}
             </div>
           )}
 
@@ -185,7 +187,7 @@ export function LoginPage() {
                   color: "#4A6FFF",
                   cursor: "pointer",
                   textDecoration: "underline",
-                  fontSize: "inherit"
+                  fontSize: "inherit",
                 }}
                 disabled={isLoading}
               >
@@ -211,14 +213,14 @@ export function LoginPage() {
                 disabled={isLoading}
                 style={{
                   opacity: isLoading ? 0.7 : 1,
-                  cursor: isLoading ? "not-allowed" : "pointer"
+                  cursor: isLoading ? "not-allowed" : "pointer",
                 }}
               >
                 {isLoading ? "Вход..." : "Войти"}
               </button>
 
               <div className="register-link">
-                Ещё нет аккаунта? <Link to="/choice-role">Зарегистрироваться</Link>
+                Еще нет аккаунта? <Link to="/choice-role">Зарегистрироваться</Link>
               </div>
             </div>
           </form>

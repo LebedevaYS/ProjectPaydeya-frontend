@@ -1,0 +1,90 @@
+:root {
+  /* ����� */
+  --primary-blue: #4172f2;
+  --primary-dark: #2E2E2E;
+  --background-light: #f1f2f4;
+  --background-white: #ffffff;
+  --accent-blue: #BEDFFF;
+  --accent-purple: #BAA4F9;
+  
+  /* ����� */
+  --text-dark: #191919;
+  --text-gray: #5E6472;
+  --text-gray-light: #C9CDD6;
+  --text-light: #FFFFFF;
+  --text-muted: #6C757D;
+  --text-blue-light: #E8EEFF;
+  --text-gray-medium: #495057;
+  
+  /* ��������� */
+  --gradient-blue: linear-gradient(90deg, #0059E6 1.9%, #3B95FF 109.51%);
+  --gradient-blue-vertical: linear-gradient(180deg, #0059E6 0%, #3B95FF 100%);
+  --gradient-dark-vertical: linear-gradient(180deg, #2E2E2E 0%, #4A4A4A 100%);
+  
+  /* ���� */
+  --shadow-card: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-hover: 0 12px 40px rgba(0,0,0,0.15);
+  --shadow-button: 0 4px 12px rgba(0,0,0,0.15);
+  
+  /* �������� */
+  --transition: all 0.3s ease;
+  --transition-slow: all 0.5s ease;
+  
+  /* ������� */
+  --section-gap: 64px;
+  --container-padding: 48px;
+  --card-gap: 24px;
+
+
+  /* Typography */
+  --font-sans-landing: 'Gilroy', sans-serif;
+  --font-sans-dashboard: 'Manrope', sans-serif;
+
+  /* Font sizes (px) */
+  --fs-14: 14px;
+  --fs-16: 16px;
+  --fs-18: 18px;
+  --fs-24: 24px;
+  --fs-32: 32px;
+  --fs-80: 80px;
+
+  /* Line-heights */
+  --lh-12: 1.2;
+  --lh-13: 1.3;
+  --lh-15: 1.5;
+
+}
+
+
+.hover-lift {
+  transition: var(--transition);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+.hover-rotate {
+  transition: var(--transition);
+}
+
+.hover-rotate:hover {
+  transform: rotate(45deg);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

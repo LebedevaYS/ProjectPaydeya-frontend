@@ -98,7 +98,7 @@ body {
     gap: 12px;
 }
 
-/* Анимированная полоска */
+/* ������������� ������� */
 .sidebar-nav__slider {
     position: absolute;
     left: 0;
@@ -123,7 +123,7 @@ body {
     opacity: 1;
 }
 
-/* Ховер эффекты для ссылки */
+/* ����� ������� ��� ������ */
 .sidebar-nav__link:hover {
     background-color: rgba(0, 0, 0, 0.05);
     color: var(--primary-blue, #1976d2);
@@ -137,7 +137,7 @@ body {
     opacity: 1;
 }
 
-/* Анимированная полоска */
+/* ������������� ������� */
 /* (deduped) duplicate .sidebar-nav__slider removed */
 .sidebar-nav__promo {
     margin: 0px 24px 0px 24px;
@@ -148,7 +148,7 @@ body {
     overflow: hidden;
     background: 
         url(../img/svg/promo_logo.svg) no-repeat,
-        #4172F1; /* самый светлый оттенок как фон */
+        #4172F1; /* ����� ������� ������� ��� ��� */
     background-size: auto 100%;
     aspect-ratio: 172 / 200;
 }
@@ -161,10 +161,10 @@ body {
     left: 0;
     right: 0;
     background: linear-gradient(to top, 
-        rgba(64, 62, 190, 1.0) 0%,      /* непрозрачно снизу */
+        rgba(64, 62, 190, 1.0) 0%,      /* ����������� ����� */
         rgba(65, 96, 222, 0.8) 50%,
         rgba(65, 114, 241, 0.3) 80%,
-        rgba(65, 114, 241, 0) 100%);    /* прозрачно сверху */
+        rgba(65, 114, 241, 0) 100%);    /* ��������� ������ */
     pointer-events: none;
 }
 
@@ -198,9 +198,9 @@ body {
     border-radius: 8px;
     width: 100%;
     padding: 6px 42px;
-    text-decoration: none; /* убираем подчеркивание */
-    color: inherit; /* наследуем цвет текста */
-    display: inline-block; /* для корректного отображения padding */
+    text-decoration: none; /* ������� ������������� */
+    color: inherit; /* ��������� ���� ������ */
+    display: inline-block; /* ��� ����������� ����������� padding */
     text-align: center;
     font-size: 14px;
     font-weight: 500;
@@ -276,7 +276,7 @@ body {
     width: 100%;
 }
 
-/* Поисковая строка */
+/* ��������� ������ */
 .search {
     position: relative;
     width: 100%;
@@ -317,7 +317,7 @@ body {
     z-index: 2;
 }
 
-/* Правая часть шапки */
+/* ������ ����� ����� */
 .header__right {
     display: flex;
     align-items: center;
@@ -325,7 +325,7 @@ body {
     justify-content: flex-end;
 }
 
-/* Уведомления */
+/* ����������� */
 .notification {
     position: relative;
     background: var(--background-white);
@@ -361,7 +361,7 @@ body {
     height: 12px;
 }
 
-/* Профиль */
+/* ������� */
 .user {
     display: flex;
     align-items: center;
@@ -414,7 +414,7 @@ body {
    PART # - EDITABLE
    ========================================================================== */
 
-/* Основные стили блока "Последние редактируемые" */
+/* �������� ����� ����� "��������� �������������" */
 .editable-section {
     background: #FFFFFF;
     border-radius: 12px;
@@ -443,7 +443,7 @@ body {
     color: #495057;
 }
 
-/* Стили для выпадающих списков */
+/* ����� ��� ���������� ������� */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -542,7 +542,7 @@ body {
     padding: 6px 12px;
 }
 
-/* Стили карточек материалов */
+/* ����� �������� ���������� */
 .editable-section__cards {
     display: flex;
     flex-direction: column;
@@ -603,7 +603,7 @@ body {
     gap: 2px;
 }
 
-/* Статусы */
+/* ������� */
 .material-card__status--draft {
     background: #DEE2E6;
     color: #495057;
@@ -663,7 +663,7 @@ body {
     opacity: 1;
 }
 
-/* Адаптивность */
+/* ������������ */
 @media (max-width: 768px) {
     .editable-section {
         padding: 16px;
@@ -712,7 +712,7 @@ body {
     gap: 16px;
   }
 
-/* Общие стили для карточек */
+/* ����� ����� ��� �������� */
 .compilation__card {
     flex: 1;
     border-radius: 16px;
@@ -724,7 +724,7 @@ body {
     text-decoration: none;
 }
 
-/* Заголовки карточек */
+/* ��������� �������� */
 .compilation__card-title {
     font-size: 16px;
     font-weight: 500;
@@ -732,10 +732,10 @@ body {
     color: #212529;
     width: 100%;
     box-sizing: border-box;
-    max-width: none; /* Убираем ограничение */
+    max-width: none; /* ������� ����������� */
 }
 
-/* Текстовые стили */
+/* ��������� ����� */
 .compilation__card-text {
     font-size: 12px;
     font-weight: 500;
@@ -802,11 +802,11 @@ body {
 .choice__all-icon {
   width: 19px;
   height: 19px;
-  transition: transform 0.5s ease; /* плавный переход */
+  transition: transform 0.5s ease; /* ������� ������� */
 }
 
 .choice__all:hover .choice__all-icon {
-  transform: rotate(45deg); /* поворот при наведении */
+  transform: rotate(45deg); /* ������� ��� ��������� */
 }
 
 .choice__card {
@@ -837,13 +837,13 @@ body {
     max-width: 117px;
 }
 
-/* Модификаторы для предметов */
+/* ������������ ��� ��������� */
 
 .choice__card {
     background-size: 45% auto;
 }
 .choice__card:hover {
-    background-size: 45% auto; /* чуть больше при наведении */
+    background-size: 45% auto; /* ���� ������ ��� ��������� */
 }
 
 .choice__card--math {
@@ -940,7 +940,7 @@ body {
     gap: 24px;
 }
 
-/* Карточка статистики */
+/* �������� ���������� */
 
 .stats-card {
     background: #FFFFFF;
@@ -1062,7 +1062,7 @@ body {
     color: #1AA552;
 }
 
-/* Промо-карточка */
+/* �����-�������� */
 
 .promo-card {
     position: relative;
@@ -1095,10 +1095,10 @@ body {
     flex-shrink: 0;
     background: rgba(255,255,255,0.15);
     border-radius: 24px;
-    /* тут можно повесить background-image: url(...) под свою svg */
+    /* ��� ����� �������� background-image: url(...) ��� ���� svg */
 }
 
-/* Популярные преподаватели */
+/* ���������� ������������� */
 
 .teachers-card {
     background: #FFFFFF;

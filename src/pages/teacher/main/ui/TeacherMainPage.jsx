@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import "../../../../shared/styles/dashboard.css";
-import "../../../../shared/styles/main_teacher.css";
+import { Link } from "react-router-dom";
+import "./TeacherMainPage.css";
 
 export function TeacherMainPage() {
   useEffect(() => {
@@ -134,11 +134,13 @@ export function TeacherMainPage() {
         <aside className="sidebar sidebar--left">
           <nav className="sidebar-nav">
             <div className="sidebar-nav__header">
-              <img
-                className="sidebar-nav__logo"
-                src="/img/svg/sidebar_logo.svg"
-                alt=""
-              />
+              <Link to="/">
+                <img
+                  className="sidebar-nav__logo"
+                  src="/img/svg/sidebar_logo.svg"
+                  alt="Пайдейя"
+                />
+              </Link>
             </div>
 
             <div className="sidebar-nav__menu-container">

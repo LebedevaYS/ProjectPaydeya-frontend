@@ -1,10 +1,599 @@
 /* ==========================================================================
-   MAIN_STUDENT.CSS
-   Стили для личного кабинета ученика
+   DASHBOARD.CSS
+   ����� ����� ��� ��������� ������� � �������������
    ========================================================================== */
 
 /* ==========================================================================
-   PART # - CHOICE (Выбор редакции — предметы)
+   1?? ����� ���������
+   ========================================================================== */
+
+.dashboard .container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.dashboard .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 1161px;
+    margin: 32px 32px 41px 24px;
+    width: 100%;
+}
+
+.dashboard .header {
+    display: grid;
+    grid-template-columns: 760px 360px;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.dashboard .main {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.dashboard .main__left {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 760px;
+    max-width: 100%;
+    flex-shrink: 0;
+}
+
+.dashboard .main__right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 360px;
+    max-width: 360px;
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   2?? SIDEBAR ���������
+   ========================================================================== */
+
+.dashboard .sidebar--left {
+    max-width: 220px;
+    height: 100vh;
+    max-height: 1024px;
+    background-color: #ffffff;
+    padding: 24px 0px 32px 0px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+}
+
+.dashboard .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.dashboard .sidebar-nav__header {
+    padding: 4px 24px;
+}
+
+.dashboard .sidebar-nav__logo {
+    display: block;
+}
+
+.dashboard .sidebar-nav__menu-container {
+    position: relative;
+    margin-top: 32px;
+    flex-grow: 1;
+}
+
+.dashboard .sidebar-nav__menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.dashboard .sidebar-nav__item {
+    display: flex;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.dashboard .sidebar-nav__icon-wrapper {
+    position: relative;
+    width: 20px;
+    height: 20px;
+}
+
+.dashboard .sidebar-nav__icon {
+    max-width: 20px;
+    max-height: 20px;
+    transition: all 0.2s ease;
+}
+
+.dashboard .sidebar-nav__icon--default {
+    opacity: 1;
+}
+
+.dashboard .sidebar-nav__icon--hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.dashboard .sidebar-nav__link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #212529;
+    font-size: 16px;
+    font-weight: 400;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 24px;
+    gap: 12px;
+}
+
+.dashboard .sidebar-nav__link--active {
+    color: #4172f2;
+    font-weight: 500;
+}
+
+.dashboard .sidebar-nav__link--active .sidebar-nav__icon--default {
+    opacity: 0;
+}
+
+.dashboard .sidebar-nav__link--active .sidebar-nav__icon--hover {
+    opacity: 1;
+}
+
+.dashboard .sidebar-nav__link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #4172f2;
+}
+
+.dashboard .sidebar-nav__link:hover .sidebar-nav__icon--default {
+    opacity: 0;
+}
+
+.dashboard .sidebar-nav__link:hover .sidebar-nav__icon--hover {
+    opacity: 1;
+}
+
+.dashboard .sidebar-nav__slider {
+    position: absolute;
+    left: 0;
+    width: 4px;
+    background-color: #4172f2;
+    border-radius: 0 2px 2px 0;
+    transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    top: 0;
+}
+
+.dashboard .sidebar-nav__promo {
+    margin: 0px 24px 0px 24px;
+    padding: 16px;
+    border-radius: 16px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    background: url(/img/svg/promo_logo.svg) no-repeat, #4172F1;
+    background-size: auto 100%;
+    aspect-ratio: 172 / 200;
+}
+
+.dashboard .sidebar-nav__promo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, 
+        rgba(64, 62, 190, 1.0) 0%,
+        rgba(65, 96, 222, 0.8) 50%,
+        rgba(65, 114, 241, 0.3) 80%,
+        rgba(65, 114, 241, 0) 100%);
+    pointer-events: none;
+}
+
+.dashboard .sidebar-nav__promo-text,
+.dashboard .sidebar-nav__promo-subtext,
+.dashboard .sidebar-nav__promo-button {
+    position: relative;
+    z-index: 1;
+}
+
+.dashboard .sidebar-nav__promo-text {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.dashboard .sidebar-nav__promo-subtext {
+    font-size: 14px;
+    font-weight: 500;
+    color: #BEDFFF;
+    margin: 4px 0px 30px 0px;
+}
+
+.dashboard .sidebar-nav__promo-button {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    padding: 6px 42px;
+    text-decoration: none;
+    color: #212529;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard .sidebar-nav__promo-button:hover {
+    background-color: #f0f0f0;
+}
+
+.dashboard .sidebar-nav__link--help {
+    display: flex;
+    align-items: center;
+    padding: 10px 24px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    margin-top: 48px;
+    transition: color 0.3s ease;
+}
+
+.dashboard .sidebar-nav__link--help:hover {
+    color: #4172f2;
+}
+
+.dashboard .sidebar-nav__help-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: 1px solid #333;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 400;
+    margin-right: 8px;
+    flex-shrink: 0;
+    color: #333;
+}
+
+.dashboard .sidebar-nav__link--help:hover .sidebar-nav__help-icon {
+    border-color: #4172f2;
+    color: #4172f2;
+}
+
+/* ==========================================================================
+   3?? HEADER ���������
+   ========================================================================== */
+
+.dashboard .header__right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: flex-end;
+}
+
+.dashboard .search {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.dashboard .search__field {
+    width: 100%;
+    padding: 12px 16px 12px 42px;
+    border-radius: 16px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    border: none;
+    line-height: 1.5;
+}
+
+.dashboard .search__field:focus {
+    outline: none;
+}
+
+.dashboard .search__field::placeholder {
+    color: #5E6472;
+}
+
+.dashboard .search::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M8.25 14.25C11.5637 14.25 14.25 11.5637 14.25 8.25C14.25 4.93629 11.5637 2.25 8.25 2.25C4.93629 2.25 2.25 4.93629 2.25 8.25C2.25 11.5637 4.93629 14.25 8.25 14.25Z' stroke='%236C757D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Cpath d='M15.75 15.75L12.4875 12.4875' stroke='%236C757D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
+    z-index: 2;
+}
+
+.dashboard .notification {
+    position: relative;
+    background: #ffffff;
+    border: none;
+    padding: 13px 14px;
+    cursor: pointer;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard .notification-badge {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    width: 12px;
+    height: 12px;
+}
+
+.dashboard .notification:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.dashboard .user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dashboard .user:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.dashboard .user__avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #4172f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.dashboard .user__name {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #212529;
+    line-height: 1.2;
+}
+
+/* ==========================================================================
+   4?? DROPDOWN (�����!)
+   ========================================================================== */
+
+.dashboard .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dashboard .dropdown__toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #F1F2F4;
+    border: none;
+    border-radius: 16px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard .dropdown__toggle:hover {
+    background-color: #e9ecef;
+    transform: translateY(-1px);
+}
+
+.dashboard .dropdown__toggle--active {
+    background-color: #e9ecef;
+}
+
+.dashboard .dropdown__icon {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard .dropdown__toggle--active .dropdown__icon {
+    transform: rotate(180deg);
+}
+
+.dashboard .dropdown__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    min-width: 160px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard .dropdown__menu--active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dashboard .dropdown__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 12px;
+    color: #495057;
+}
+
+.dashboard .dropdown__item:hover {
+    background-color: #f8f9fa;
+    transform: translateX(2px);
+}
+
+.dashboard .dropdown__item input[type="checkbox"] {
+    margin: 0;
+    width: 14px;
+    height: 14px;
+    transition: all 0.2s ease;
+}
+
+/* ==========================================================================
+   ������������ ��� ����� �����������
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .dashboard .container {
+        flex-direction: column;
+    }
+    
+    .dashboard .sidebar--left {
+        max-width: 100%;
+        height: auto;
+        position: static;
+        padding: 16px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .dashboard .sidebar-nav {
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+        gap: 24px;
+    }
+    
+    .dashboard .sidebar-nav__header {
+        padding: 0;
+    }
+    
+    .dashboard .sidebar-nav__menu-container {
+        margin-top: 0;
+        flex-grow: 1;
+        max-width: 300px;
+    }
+    
+    .dashboard .sidebar-nav__promo {
+        display: none;
+    }
+    
+    .dashboard .sidebar-nav__link--help {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard .sidebar-nav {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .dashboard .sidebar-nav__menu-container {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .dashboard .sidebar-nav__menu {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+    
+    .dashboard .sidebar-nav__item {
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .dashboard .sidebar-nav__link {
+        flex-direction: column;
+        padding: 8px 12px;
+        text-align: center;
+        gap: 6px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard .header {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .dashboard .header__right {
+        gap: 12px;
+    }
+    
+    .dashboard .user {
+        padding: 6px 12px;
+    }
+    
+    .dashboard .user__name {
+        font-size: 14px;
+    }
+    
+    .dashboard .notification {
+        padding: 10px;
+    }
+}
+
+/* ==========================================================================
+   MAIN_STUDENT.CSS
+   ����� ��� ������� �������� �������
+   ========================================================================== */
+
+/* ==========================================================================
+   PART # - CHOICE (����� �������� � ��������)
    ========================================================================== */
 
 .student-page .choice {
@@ -82,7 +671,7 @@
     max-width: 117px;
 }
 
-/* Модификаторы для предметов */
+/* ������������ ��� ��������� */
 .student-page .choice__card--math {
     background-image: url(../img/svg/math-1.svg);
 }
@@ -168,7 +757,7 @@
 }
 
 /* ==========================================================================
-   RESPONSIVE - Адаптация (choice карточки)
+   RESPONSIVE - ��������� (choice ��������)
    ========================================================================== */
 
 @media (max-width: 1200px) {
@@ -264,7 +853,7 @@
 }
 
 /* ==========================================================================
-   PART # - EDITABLE SECTION (Продолжить обучение)
+   PART # - EDITABLE SECTION (���������� ��������)
    ========================================================================== */
 
 .student-page .editable-section {
@@ -341,7 +930,7 @@
 }
 
 /* ==========================================================================
-   MATERIAL CARD - иконки через position absolute
+   MATERIAL CARD - ������ ����� position absolute
    ========================================================================== */
 
 .student-page .material-card {
@@ -415,7 +1004,7 @@
     white-space: nowrap;
 }
 
-/* Цвета предметов */
+/* ����� ��������� */
 .student-page .material-card__subject--informatics {
     color: #7B61FF;
     background-color: #F2EBFF;
@@ -575,7 +1164,7 @@
 }
 
 /* ==========================================================================
-   RECOMMENDED LESSONS (Подобрали для вас уроки)
+   RECOMMENDED LESSONS (��������� ��� ��� �����)
    ========================================================================== */
 
 .student-page .recommended-lessons {
@@ -790,7 +1379,7 @@
 }
 
 /* ==========================================================================
-   PART # - MAIN__RIGHT (Правая колонка)
+   PART # - MAIN__RIGHT (������ �������)
    ========================================================================== */
 
 .student-page .stats-card {
@@ -1088,7 +1677,7 @@
 }
 
 /* ==========================================================================
-   RESPONSIVE - Общие адаптации для сохраненных компонентов
+   RESPONSIVE - ����� ��������� ��� ����������� �����������
    ========================================================================== */
 
 @media (max-width: 1024px) {
