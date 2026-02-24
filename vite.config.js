@@ -13,7 +13,6 @@ export default defineConfig({
         target: 'https://paydeya.test-try.crazedns.ru',
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, '/api/v1')
       }
     }
   }
